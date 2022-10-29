@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/wi-pa/static/css/main.1f544f91.css",
+    "main.js": "/wi-pa/static/js/main.44cceb9b.js",
+    "static/js/787.28cb0dcd.chunk.js": "/wi-pa/static/js/787.28cb0dcd.chunk.js",
+    "static/media/landing-bg.JPG": "/wi-pa/static/media/landing-bg.2d85c69fb4a6a7e6ff51.JPG",
+    "index.html": "/wi-pa/index.html",
+    "main.1f544f91.css.map": "/wi-pa/static/css/main.1f544f91.css.map",
+    "main.44cceb9b.js.map": "/wi-pa/static/js/main.44cceb9b.js.map",
+    "787.28cb0dcd.chunk.js.map": "/wi-pa/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1f544f91.css",
+    "static/js/main.44cceb9b.js"
+  ]
+}
