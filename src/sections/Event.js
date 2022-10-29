@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { createUseStyles } from "react-jss";
-import { motion, useTransform, useViewportScroll, useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import cx from 'classnames';
-
+import Button from '../components/Button'
 
 const useStyles = createUseStyles({
     flexWrapper: {
@@ -87,7 +87,7 @@ const useStyles = createUseStyles({
     },
     viewMap:{
         position: 'absolute',
-        marginTop: '54px',
+        marginTop: '70px',
         border: 'none',
         padding: '11px 14px',
         borderRadius: '6px',
