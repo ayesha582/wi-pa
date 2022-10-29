@@ -146,14 +146,14 @@ const SelectComponent = ({setEventConfig}) => {
             transition={{ duration: 0.7, ease: 'easeOut' }}
             variants={variants}
         >
-            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }} className={classes.fab} onClick={()=>onFabClick('BRIDE')}>Bride </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className={classes.fab} onClick={()=>onFabClick('BRIDE')}>Bride </motion.div>
         </motion.div>
         <motion.div className={cx(classes.BottomHalf, classes.half)}
             animate={shouldAnimate ? 'hide' : 'show'}
             transition={{ duration: 0.7, ease: 'easeOut' }}
             variants={variants2}
         >
-            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }} className={cx(classes.fab, classes.fabReverse)} onClick={()=>onFabClick('GROOM')}>Groom </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className={cx(classes.fab, classes.fabReverse)} onClick={()=>onFabClick('GROOM')}>Groom </motion.div>
         </motion.div>
     </>
 }
