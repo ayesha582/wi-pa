@@ -60,7 +60,8 @@ const useStyles = createUseStyles({
         marginLeft: '10vw',
         position: 'relative',
         top: '50%',
-        transform: 'translateY(-50%)'
+        transform: 'translateY(-50%)',
+        maxWidth: 'fit-content',
     },
     topCard: {
         // background: '#F28705',
@@ -146,8 +147,11 @@ const Event = ({eventConfig}) => {
     const classes = useStyles({})
 
     return eventConfig.map(e =>
-        <section className={cx(classes[`${e.containerClass}`], classes.selectionContainer)}>
+        <section className={cx(classes[`${e.containerClass}`], classes.selectionContainer)} key={e.containerClass}>
             <EventSection {...e} />
+            <Button onClick={viewOnMap(e.location)}>
+                View on Map
+            </Button>
         </section>
         )
 }
