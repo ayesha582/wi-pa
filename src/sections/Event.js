@@ -4,40 +4,6 @@ import { motion, useTransform, useViewportScroll, useInView } from 'framer-motio
 import cx from 'classnames';
 
 
-const eventConfig = [
-    {
-        name: 'Haldi',
-        date: '13th FEB 2022',
-        time: '1PM onwards',
-        address: 'Sarovar Vihar Patratu resort',
-        primaryColor: '#F28705',
-        seconDaryColor: '#F20574',
-        containerClass: 'haldi'
-    },
-    {
-        name: <><div>The</div><div>Wedding</div></>,
-        date: '14th FEB 2022',
-        time: '9AM',
-        address: 'G.E.L Church, Main Road - Ranchi',
-        isFlipped: true,
-        primaryColor: '#F2E7DC',
-        seconDaryColor: '#656773',
-        containerClass: 'wedding',
-        cardStyle:{
-            color: '#734022'
-        }
-    },
-    {
-        name: 'Lunch & Reception',
-        date: '14th FEB 2022',
-        time: '1PM onwards',
-        address: 'Sarovar Vihar Patratu resort',
-        primaryColor: '#8C4303',
-        seconDaryColor: '#BF3604',
-        containerClass: 'reception'
-    },
-]
-
 const useStyles = createUseStyles({
     flexWrapper: {
         display: 'flex',
@@ -176,7 +142,7 @@ const EventSection = ({ primaryColor, seconDaryColor, isFlipped = false, name, d
 }
 
 
-const Event = () => {
+const Event = ({eventConfig}) => {
     const classes = useStyles({})
 
     return eventConfig.map(e =>

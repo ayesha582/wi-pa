@@ -7,11 +7,11 @@ const useStyles = createUseStyles({
 
 });
 
-const Layout = () => {
+const Layout = ({eventConfig}) => {
     const classes = useStyles({})
     return <>
        <Landing />
-       <Event />
+       {eventConfig && <Event eventConfig={eventConfig}/>}
     </>
 }
 
