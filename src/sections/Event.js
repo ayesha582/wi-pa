@@ -84,12 +84,22 @@ const useStyles = createUseStyles({
         float: 'right',
         marginLeft: 'unset',
         marginRight: '26vh',
+    },
+    viewMap:{
+        position: 'absolute',
+        marginTop: '54px',
+        border: 'none',
+        padding: '11px 14px',
+        borderRadius: '6px',
+        fontSize: '14px',
+        fontWeight: '600',
+        cursor: 'pointer',
     }
 });
 
 
 
-const EventSection = ({ primaryColor, seconDaryColor, isFlipped = false, name, date, time, cardStyle = {} }) => {
+const EventSection = ({ primaryColor, seconDaryColor, isFlipped = false, name, date, time, cardStyle = {}, location }) => {
     const classes = useStyles({})
 
     const ref = useRef(null)
@@ -112,6 +122,8 @@ const EventSection = ({ primaryColor, seconDaryColor, isFlipped = false, name, d
             scale: 0.65
         }
     };
+    const viewOnMap = location => () => window.open(location, '_blank');
+
     return (
         <div className={cx(isFlipped ?cx(classes.flipContainer, classes.cardsContainer) :classes.cardsContainer)}>
             <motion.div
@@ -138,6 +150,9 @@ const EventSection = ({ primaryColor, seconDaryColor, isFlipped = false, name, d
                     <div className={classes.desc}>{`${time} onwards`}</div>
                 </div>
             </motion.div>
+            <Button onClick={viewOnMap(location)} className={classes.viewMap}>
+                View on Map
+            </Button>
         </div>
     )
 }
@@ -149,9 +164,6 @@ const Event = ({eventConfig}) => {
     return eventConfig.map(e =>
         <section className={cx(classes[`${e.containerClass}`], classes.selectionContainer)} key={e.containerClass}>
             <EventSection {...e} />
-            <Button onClick={viewOnMap(e.location)}>
-                View on Map
-            </Button>
         </section>
         )
 }
