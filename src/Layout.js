@@ -5,7 +5,7 @@ import Event from './sections/Event';
 
 import rsvp from './img/rsvp.png';
 
-const RSVP_FORM_URL = 'https://docs.google.com/forms/d/1HN0MfGDw3bqyF3SRXkCaAVxW6hnTVYXcUQD4zGsLHhs/edit';
+const RSVP_FORM_URL = 'https://forms.gle/TD7NMfMuEvfttrCc8';
 
 const useStyles = createUseStyles({
     rsvpIconWrapper: {
