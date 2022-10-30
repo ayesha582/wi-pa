@@ -72,6 +72,12 @@ const useStyles = createUseStyles({
         left: '50%',
         transform: 'translate(-50%, -50%) scale(0.2)',
         zIndex: '30'
+    },
+    guest:{
+        fontSize: '30px',
+        color: '#F2E7DC',
+        position: 'absolute',
+        top: '50%',
     }
 });
 
@@ -145,7 +151,8 @@ const SelectComponent = ({setEventConfig}) => {
             animate={shouldAnimate ? 'hide' : 'show'}
             transition={{ duration: 0.7, ease: 'easeOut' }}
             variants={variants}
-        >
+            >
+            <div className={classes.guest}>I am a guest of...</div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className={classes.fab} onClick={()=>onFabClick('BRIDE')}>Bride </motion.div>
         </motion.div>
         <motion.div className={cx(classes.BottomHalf, classes.half)}

@@ -1,7 +1,11 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css';
 import Select from './Select';
 import Layout from './Layout';
+import HaldiImg from './img/haldi-card.JPG';
+import WeddingImg from './img/wedding-card.JPG'
+import ReceptionImg from './img/reception-card.JPG'
+
 
 const PATRATU_RESORT_LOCATION = 'https://www.google.com/maps/place/Patratu+Lake+Resort/@23.6100753,85.2810746,15z/data=!4m8!3m7!1s0x0:0xf2cfa8cca411ddad!5m2!4m1!1i2!8m2!3d23.6101263!4d85.2810261';
 
@@ -11,38 +15,62 @@ const GEL_CHURCH_RANCHI_LOCATION = 'https://www.google.com/maps/place/Gossner+Ev
 const EVENTS_CONFIGS_BY_TYPE = {
   BRIDE: [
     {
-        name: 'Haldi',
-        date: '13th FEB 2022',
-        time: '1PM onwards',
-        address: 'Sarovar Vihar Patratu resort',
-        primaryColor: '#F28705',
-        seconDaryColor: '#F20574',
-        containerClass: 'haldi',
-        location: PATRATU_RESORT_LOCATION
+      name: 'Haldi',
+      date: '13th FEB 2022',
+      time: '1PM onwards',
+      address: 'Sarovar Vihar Patratu resort',
+      primaryColor: '#F28705',
+      seconDaryColor: '#F20574',
+      containerClass: 'haldi',
+      location: PATRATU_RESORT_LOCATION,
+      cardStyle: {
+        backgroundImage: `url(${HaldiImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'bottom'
+      },
+      address: [
+        'Sarovar Vihar, Patratu Lake Resort',
+        'Kodram, Patratu, Jharkhand 829119'
+      ]
     },
     {
-        name: <><div>The</div><div>Wedding</div></>,
-        date: '14th FEB 2022',
-        time: '9AM',
-        address: 'G.E.L Church, Main Road - Ranchi',
-        isFlipped: true,
-        primaryColor: '#F2E7DC',
-        seconDaryColor: '#656773',
-        containerClass: 'wedding',
-        cardStyle:{
-            color: '#734022'
-        },
-        location: GEL_CHURCH_RANCHI_LOCATION
+      name: <><div>The</div><div>Wedding</div></>,
+      date: '14th FEB 2022',
+      time: '9AM',
+      address: 'G.E.L Church, Main Road - Ranchi',
+      isFlipped: true,
+      primaryColor: '#F2E7DC',
+      seconDaryColor: '#656773',
+      containerClass: 'wedding',
+      cardStyle: {
+        backgroundImage: `url(${WeddingImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'bottom'
+      },
+      location: GEL_CHURCH_RANCHI_LOCATION,
+      address: [
+        'Gossner Evangelical Lutheran Church',
+        'Main Rd, Ranchi, Jharkhand 834001'
+      ]
     },
     {
-        name: 'Lunch & Reception',
-        date: '14th FEB 2022',
-        time: '1PM onwards',
-        address: 'Sarovar Vihar Patratu resort',
-        primaryColor: '#8C4303',
-        seconDaryColor: '#BF3604',
-        containerClass: 'reception',
-        location: PATRATU_RESORT_LOCATION
+      name: 'Lunch & Reception',
+      date: '14th FEB 2022',
+      time: '1PM onwards',
+      address: 'Sarovar Vihar Patratu resort',
+      primaryColor: '#8C4303',
+      seconDaryColor: '#BF3604',
+      containerClass: 'reception',
+      location: PATRATU_RESORT_LOCATION,
+      cardStyle: {
+        backgroundImage: `url(${ReceptionImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'bottom'
+      },
+      address: [
+        'Sarovar Vihar, Patratu Lake Resort',
+        'Kodram, Patratu, Jharkhand 829119'
+      ]
     },
   ],
   GROOM: [
@@ -55,12 +83,18 @@ const EVENTS_CONFIGS_BY_TYPE = {
       primaryColor: '#F2E7DC',
       seconDaryColor: '#656773',
       containerClass: 'wedding',
-      cardStyle:{
-          color: '#734022'
+      cardStyle: {
+        backgroundImage: `url(${WeddingImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'bottom'
       },
-      location: GEL_CHURCH_RANCHI_LOCATION
-  },
-  {
+      location: GEL_CHURCH_RANCHI_LOCATION,
+      address: [
+        'Gossner Evangelical Lutheran Church',
+        'Main Rd, Ranchi, Jharkhand 834001'
+      ]
+    },
+    {
       name: 'Lunch & Reception',
       date: '14th FEB 2022',
       time: '1PM onwards',
@@ -68,8 +102,17 @@ const EVENTS_CONFIGS_BY_TYPE = {
       primaryColor: '#8C4303',
       seconDaryColor: '#BF3604',
       containerClass: 'reception',
-      location: PATRATU_RESORT_LOCATION
-  },
+      location: PATRATU_RESORT_LOCATION,
+      cardStyle: {
+        backgroundImage: `url(${ReceptionImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'bottom'
+      },
+      address: [
+        'Sarovar Vihar, Patratu Lake Resort',
+        'Kodram, Patratu, Jharkhand 829119'
+      ]
+    },
   ]
 }
 
@@ -79,8 +122,8 @@ function App() {
 
   return (
     <div className="App">
-      <Select setEventConfig={setEventConfig}/>
-      <Layout eventConfig={EVENTS_CONFIGS_BY_TYPE[eventConfig]}/>
+      <Select setEventConfig={setEventConfig} />
+      <Layout eventConfig={EVENTS_CONFIGS_BY_TYPE[eventConfig]} />
     </div>
   );
 }

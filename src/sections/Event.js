@@ -20,6 +20,8 @@ const useStyles = createUseStyles({
         background: 'linear-gradient(-45deg, #061A26, #143840);',
         color: 'white',
         overflow: 'auto',
+        display: 'flex',
+        alignItems: 'center'
     },
     tableHead: {
         padding: '100px 0',
@@ -49,18 +51,21 @@ const useStyles = createUseStyles({
     },
     haldi: {
         background: 'linear-gradient(-45deg, #F2CB05, #F2B705);',
+        color: '#2A4C59',
+        '& button': {
+            background: '#2A4C59',
+            color: 'white'
+        }
     },
     wedding: {
         background: 'linear-gradient(-45deg, #011640, #021F59);',
     },
-    reception:{
+    reception: {
         background: 'linear-gradient(-45deg, #592202, #260B01);',
     },
     cardsContainer: {
         marginLeft: '10vw',
         position: 'relative',
-        top: '50%',
-        transform: 'translateY(-50%)',
         maxWidth: 'fit-content',
     },
     topCard: {
@@ -70,36 +75,43 @@ const useStyles = createUseStyles({
         top: '30px'
     },
     cardContent: {
-        transform: 'translateY(50%)',
         fontSize: '16px',
+        flex: '1'
     },
     descTitle: {
-        fontSize: '54px'
+        fontSize: '4rem',
+        marginBottom: '20px'
     },
     desc: {
         margin: '10px 0',
-        fontFamily: 'Quicksand, sans-serif'
+        fontFamily: 'Quicksand, sans-serif',
+        fontSize: '1.4rem'
     },
-    flipContainer:{
-        float: 'right',
-        marginLeft: 'unset',
+    flipContainer: {
         marginRight: '26vh',
     },
-    viewMap:{
-        position: 'absolute',
-        marginTop: '70px',
+    viewMap: {
         border: 'none',
         padding: '11px 14px',
         borderRadius: '6px',
         fontSize: '14px',
         fontWeight: '600',
         cursor: 'pointer',
+        fontFamily: 'Quicksand, sans-serif',
+        marginTop: '30px'
+    },
+    flip: {
+        flexDirection: 'row-reverse'
+    },
+    address: {
+        fontSize: '1.4rem',
+        lineHeight: '34px'
     }
 });
 
 
 
-const EventSection = ({ primaryColor, seconDaryColor, isFlipped = false, name, date, time, cardStyle = {}, location }) => {
+const CardsArea = ({ primaryColor, seconDaryColor, cardStyle = {}, isFlipped }) => {
     const classes = useStyles({})
 
     const ref = useRef(null)
@@ -109,7 +121,7 @@ const EventSection = ({ primaryColor, seconDaryColor, isFlipped = false, name, d
     });
 
     const variants = {
-        visible: { opacity: 1, scale: 1, transform: 'rotate(-20deg)' },
+        visible: { opacity: 1, scale: 1, transform: 'rotate(-12deg)' },
         hidden: {
             opacity: 0,
             scale: 0.65
@@ -117,22 +129,21 @@ const EventSection = ({ primaryColor, seconDaryColor, isFlipped = false, name, d
     };
 
     const variants2 = {
-        visible: { scale: 1, transform: 'rotate(20deg)' },
+        visible: { scale: 1, transform: 'rotate(12deg)' },
         hidden: {
             scale: 0.65
         }
     };
-    const viewOnMap = location => () => window.open(location, '_blank');
 
     return (
-        <div className={cx(isFlipped ?cx(classes.flipContainer, classes.cardsContainer) :classes.cardsContainer)}>
+        <div className={cx(classes.cardsContainer, isFlipped ? classes.flipContainer : '')}>
             <motion.div
                 animate={inView ? 'visible' : 'hidden'}
                 variants={variants}
                 transition={{ duration: 1, ease: 'easeOut' }}
                 ref={ref}
                 className={classes.appearCard}
-                style={{ background: seconDaryColor, ...cardStyle }}
+                style={{ background: seconDaryColor }}
             >
 
             </motion.div>
@@ -144,28 +155,37 @@ const EventSection = ({ primaryColor, seconDaryColor, isFlipped = false, name, d
                 className={cx(classes.appearCard, classes.topCard)}
                 style={{ background: primaryColor, ...cardStyle }}
             >
-                <div className={classes.cardContent}>
-                    <div className={classes.descTitle}>{name}</div>
-                    <div className={classes.desc}>{`${date}`}</div>
-                    <div className={classes.desc}>{`${time} onwards`}</div>
-                </div>
             </motion.div>
-            <Button onClick={viewOnMap(location)} className={classes.viewMap}>
-                View on Map
-            </Button>
+
         </div>
     )
 }
 
 
-const Event = ({eventConfig}) => {
+const Event = ({ eventConfig }) => {
     const classes = useStyles({})
 
+    const viewOnMap = location => () => window.open(location, '_blank');
+
+
     return eventConfig.map(e =>
-        <section className={cx(classes[`${e.containerClass}`], classes.selectionContainer)} key={e.containerClass}>
-            <EventSection {...e} />
+        <section className={cx(classes[`${e.containerClass}`], classes.selectionContainer, e.isFlipped ? classes.flip : '')} key={e.containerClass}>
+            <CardsArea {...e} />
+            <div className={classes.cardContent}>
+                <div className={classes.descTitle}>{e.name}</div>
+                <div className={classes.desc}>{`${e.date}`}</div>
+                <div className={classes.desc}>{`${e.time} onwards`}</div>
+                {
+                    e.address.map(a => {
+                        return <div className={classes.address}>{a}</div>
+                    })
+                }
+                <Button onClick={viewOnMap(e.location)} className={classes.viewMap}>
+                    View on Map
+                </Button>
+            </div>
         </section>
-        )
+    )
 }
 
 export default Event
