@@ -5,6 +5,7 @@ import Layout from './Layout';
 import HaldiImg from './img/haldi-card.JPG';
 import WeddingImg from './img/wedding-card.JPG'
 import ReceptionImg from './img/reception-card.JPG'
+import Parallax from './sections/Parallax'
 
 
 const PATRATU_RESORT_LOCATION = 'https://www.google.com/maps/place/Patratu+Lake+Resort/@23.6100753,85.2810746,15z/data=!4m8!3m7!1s0x0:0xf2cfa8cca411ddad!5m2!4m1!1i2!8m2!3d23.6101263!4d85.2810261';
@@ -24,7 +25,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       containerClass: 'haldi',
       location: PATRATU_RESORT_LOCATION,
       cardStyle: {
-        backgroundImage: `url(${HaldiImg})`,
+        // backgroundImage: `url(${HaldiImg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'bottom'
       },
@@ -43,7 +44,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       seconDaryColor: '#656773',
       containerClass: 'wedding',
       cardStyle: {
-        backgroundImage: `url(${WeddingImg})`,
+        // backgroundImage: `url(${WeddingImg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'bottom'
       },
@@ -63,7 +64,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       containerClass: 'reception',
       location: PATRATU_RESORT_LOCATION,
       cardStyle: {
-        backgroundImage: `url(${ReceptionImg})`,
+        // backgroundImage: `url(${ReceptionImg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'bottom'
       },
@@ -118,12 +119,13 @@ const EVENTS_CONFIGS_BY_TYPE = {
 
 
 function App() {
-  const [eventConfig, setEventConfig] = useState(null)
+  const [eventConfig, setEventConfig] = useState('')
 
   return (
     <div className="App">
       <Select setEventConfig={setEventConfig} />
-      <Layout eventConfig={EVENTS_CONFIGS_BY_TYPE[eventConfig]} />
+      {/* <Layout eventConfig={EVENTS_CONFIGS_BY_TYPE["BRIDE"]} /> */}
+      {eventConfig && <Parallax eventConfig={EVENTS_CONFIGS_BY_TYPE[eventConfig]}/>}
     </div>
   );
 }

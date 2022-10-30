@@ -1,24 +1,43 @@
 import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
-import { motion, useMotionValue, animate } from 'framer-motion';
+import { motion } from 'framer-motion';
 import cx from 'classnames';
 import Lottie from 'react-lottie'
 import animationData from './img/flowers.json'
 
-
 const useStyles = createUseStyles({
     fab: {
-        background: 'white',
-        borderRadius: '50%',
-        width: '244px',
-        height: '244px',
         color: '#A6695B',
         lineHeight: '115px',
         cursor: 'pointer',
+        display: 'inline',
+    },
+    fabContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%,-50%)',
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
         position: 'absolute',
+        zIndex: '60'
+    },
+    centerContent: {
+        position: 'fixed',
         fontSize: '40px',
-        bottom: '-15vh',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%,-50%)',
         zIndex: '40'
+    },
+    circle: {
+        background: 'wheat',
+        borderRadius: '50%',
+        width: '244px',
+        height: '244px',
     },
     topHalf: {
         background: 'pink',
@@ -39,14 +58,8 @@ const useStyles = createUseStyles({
         overflow: 'hidden',
         background: '#16181F'
     },
-    fabReverse: {
-        bottom: 'unset',
-        top: '-15vh',
-        display: 'flex',
-        flexDirection: 'column-reverse'
-    },
     guest: {
-        fontSize: '30px',
+        fontSize: '40px',
         color: '#F2E7DC',
         position: 'absolute',
         top: '30%',
@@ -57,15 +70,10 @@ const useStyles = createUseStyles({
         height: '45px',
         width: '45px',
         background: '#16181F',
-        top: '100%',
+        top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
         borderRadius: '50%',
-    },
-    dotReverse: {
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        top: 'unset'
     }
 });
 
@@ -97,8 +105,15 @@ const SelectComponent = ({ setEventConfig }) => {
     };
 
     const onFabClick = (type) => {
-        setAnimate(true)
         setEventConfig(type)
+        const element = document.body;
+        element.style.overflow = 'unset';
+        setTimeout(
+            ()=>{
+                setAnimate(true)
+            },
+            3000
+        );
     }
 
     const classes = useStyles({});
@@ -112,45 +127,44 @@ const SelectComponent = ({ setEventConfig }) => {
     };
     return <>
 
+        {!shouldAnimate && <div className={classes.centerContent}>
+            <div className={classes.circle}></div>
+            <div className={classes.dot}></div>
+            <div className={classes.fabContainer}>
+                <motion.div whileHover={{ scale: 1.2 }}  className={classes.fab} onClick={() => onFabClick('BRIDE')}>
+                    Bride
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.2 }}  className={classes.fab} onClick={() => onFabClick('GROOM')}>
+                    Groom
+                </motion.div>
+            </div>
+            <Lottie options={defaultOptions}
+                height={410}
+                width={410}
+                style={{
+                    position: 'fixed',
+                    top: '50%%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%) scale(1.1)',
+                    zIndex: '30',
+                    margin: '0 0 0 7px',
+                    top: '50%'
+                }}
+            />
+        </div>}
+
         <motion.div className={cx(classes.topHalf, classes.half)}
             animate={shouldAnimate ? 'hide' : 'show'}
             transition={{ duration: 0.7, ease: 'easeOut' }}
             variants={variants}
         >
             <div className={classes.guest}>I am a guest of the...</div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className={classes.fab} onClick={() => onFabClick('BRIDE')}>Bride </motion.div>
-            <Lottie options={defaultOptions}
-                height={410}
-                width={410}
-                style={{
-                    position: 'absolute',
-                    top: '100%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%) scale(1.1)',
-                    zIndex: '30',
-                    margin: '0 0 0 5px'
-                }}
-            />
-            <div className={classes.dot}></div>
         </motion.div>
         <motion.div className={cx(classes.BottomHalf, classes.half)}
             animate={shouldAnimate ? 'hide' : 'show'}
             transition={{ duration: 0.7, ease: 'easeOut' }}
             variants={variants2}
         >
-            <Lottie options={defaultOptions}
-                height={410}
-                width={410}
-                style={{
-                    position: 'absolute',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%) scale(1.1)',
-                    zIndex: '30',
-                    margin: '0 0 0 5px'
-                }}
-            />
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className={cx(classes.fab, classes.fabReverse)} onClick={() => onFabClick('GROOM')}>Groom </motion.div>
-            <div className={cx(classes.dot, classes.dotReverse)}></div>
         </motion.div>
     </>
 }
