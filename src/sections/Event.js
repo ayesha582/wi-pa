@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { createUseStyles } from "react-jss";
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll } from 'framer-motion';
 import cx from 'classnames';
 import Button from '../components/Button'
 
@@ -162,29 +162,53 @@ const CardsArea = ({ primaryColor, seconDaryColor, cardStyle = {}, isFlipped }) 
 }
 
 
-const Event = ({ eventConfig }) => {
+const EventsSection = (e) => {
+    const {
+        isFlipped,
+        containerClass,
+        name,
+        date,
+        time,
+        address,
+        location
+    } = e
+    const viewOnMap = location => () => window.open(location, '_blank'); 
+
     const classes = useStyles({})
 
-    const viewOnMap = location => () => window.open(location, '_blank');
-
-
-    return eventConfig.map(e =>
-        <section className={cx(classes[`${e.containerClass}`], classes.selectionContainer, e.isFlipped ? classes.flip : '')} key={e.containerClass}>
+    return (
+        <section className={cx(classes[`${containerClass}`], classes.selectionContainer, isFlipped ? classes.flip : '')} key={containerClass}>
             <CardsArea {...e} />
             <div className={classes.cardContent}>
-                <div className={classes.descTitle}>{e.name}</div>
-                <div className={classes.desc}>{`${e.date}`}</div>
-                <div className={classes.desc}>{`${e.time} onwards`}</div>
+                <div className={classes.descTitle}>{name}</div>
+                <div className={classes.desc}>{`${date}`}</div>
+                <div className={classes.desc}>{`${time} onwards`}</div>
                 {
-                    e.address.map(a => {
+                    address.map(a => {
                         return <div className={classes.address}>{a}</div>
                     })
                 }
-                <Button onClick={viewOnMap(e.location)} className={classes.viewMap}>
+                <Button onClick={viewOnMap(location)} className={classes.viewMap}>
                     View on Map
                 </Button>
             </div>
         </section>
+    )
+}
+
+
+const Event = ({ eventConfig }) => {
+
+    const { scrollY } = useScroll()
+
+    useEffect(() => {
+        return scrollY.onChange((latest) => {
+          console.log("Page scroll: ", latest)
+        })
+      }, [])
+
+    return eventConfig.map(e =>
+        <EventsSection {...e}/>
     )
 }
 

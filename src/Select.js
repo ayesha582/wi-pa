@@ -1,45 +1,24 @@
 import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
-import { motion, useTransform, useMotionValue, animate, transform } from 'framer-motion';
+import { motion, useMotionValue, animate } from 'framer-motion';
 import cx from 'classnames';
-import { interpolate } from "flubber";
-
-export const heart =
-    "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
-
-export const star =
-    "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z";
-
-const paths = [heart, star, heart];
-
-const colors = [
-    "#ee4444",
-    "#ffcc00",
-    "#ee4444",
-];
-
-
-export const getIndex = (_, index) => index;
-
-export function useFlubber(progress, paths) {
-    return useTransform(progress, paths.map(getIndex), paths, {
-        mixer: (a, b) => interpolate(a, b, { maxSegmentLength: 0.1 })
-    });
-}
+import Lottie from 'react-lottie'
+import animationData from './img/flowers.json'
 
 
 const useStyles = createUseStyles({
     fab: {
         background: 'white',
         borderRadius: '50%',
-        width: '30vh',
-        height: '30vh',
+        width: '244px',
+        height: '244px',
         color: '#A6695B',
-        lineHeight: '150px',
+        lineHeight: '115px',
         cursor: 'pointer',
         position: 'absolute',
         fontSize: '40px',
-        bottom: '-15vh'
+        bottom: '-15vh',
+        zIndex: '40'
     },
     topHalf: {
         background: 'pink',
@@ -66,23 +45,32 @@ const useStyles = createUseStyles({
         display: 'flex',
         flexDirection: 'column-reverse'
     },
-    scaleSvg: {
-        position: 'fixed',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%) scale(0.2)',
-        zIndex: '30'
-    },
-    guest:{
+    guest: {
         fontSize: '30px',
         color: '#F2E7DC',
         position: 'absolute',
-        top: '50%',
+        top: '30%',
+    },
+    dot: {
+        position: 'absolute',
+        zIndex: '50',
+        height: '45px',
+        width: '45px',
+        background: '#16181F',
+        top: '100%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        borderRadius: '50%',
+    },
+    dotReverse: {
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        top: 'unset'
     }
 });
 
 
-const SelectComponent = ({setEventConfig}) => {
+const SelectComponent = ({ setEventConfig }) => {
 
     const [shouldAnimate, setAnimate] = useState(false)
 
@@ -108,59 +96,61 @@ const SelectComponent = ({setEventConfig}) => {
         }
     };
 
-    const [pathIndex, setPathIndex] = useState(0);
-    const progress = useMotionValue(pathIndex);
-    const fill = useTransform(progress, paths.map(getIndex), colors);
-    const path = useFlubber(progress, paths);
-
-    const onFabClick = (type) =>{
+    const onFabClick = (type) => {
         setAnimate(true)
         setEventConfig(type)
     }
 
-    React.useEffect(() => {
-        const animation = animate(progress, pathIndex, {
-            duration: 1.2,
-            ease: "easeInOut",
-            onComplete: () => {
-                if (pathIndex === paths.length - 1) {
-                    progress.set(0);
-                    setPathIndex(0);
-                } else {
-                    setPathIndex(pathIndex + 1);
-                }
-            }
-        });
-        if(shouldAnimate){
-            animation.stop();
-        }
-        return () => animation.stop();
-    }, [pathIndex, shouldAnimate]);
-
     const classes = useStyles({});
+    const defaultOptions = {
+        loop: false,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
     return <>
-    {
-        !shouldAnimate &&
-        <svg width="400" height="400" className={cx(classes.scaleSvg, classes.disappear)}>
-            <g transform="translate(10 10) scale(17 17)">
-                <motion.path fill={fill} d={path} />
-            </g>
-        </svg>
-    }
+
         <motion.div className={cx(classes.topHalf, classes.half)}
             animate={shouldAnimate ? 'hide' : 'show'}
             transition={{ duration: 0.7, ease: 'easeOut' }}
             variants={variants}
-            >
-            <div className={classes.guest}>I am a guest of...</div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className={classes.fab} onClick={()=>onFabClick('BRIDE')}>Bride </motion.div>
+        >
+            <div className={classes.guest}>I am a guest of the...</div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className={classes.fab} onClick={() => onFabClick('BRIDE')}>Bride </motion.div>
+            <Lottie options={defaultOptions}
+                height={410}
+                width={410}
+                style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%) scale(1.1)',
+                    zIndex: '30',
+                    margin: '0 0 0 5px'
+                }}
+            />
+            <div className={classes.dot}></div>
         </motion.div>
         <motion.div className={cx(classes.BottomHalf, classes.half)}
             animate={shouldAnimate ? 'hide' : 'show'}
             transition={{ duration: 0.7, ease: 'easeOut' }}
             variants={variants2}
         >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className={cx(classes.fab, classes.fabReverse)} onClick={()=>onFabClick('GROOM')}>Groom </motion.div>
+            <Lottie options={defaultOptions}
+                height={410}
+                width={410}
+                style={{
+                    position: 'absolute',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%) scale(1.1)',
+                    zIndex: '30',
+                    margin: '0 0 0 5px'
+                }}
+            />
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className={cx(classes.fab, classes.fabReverse)} onClick={() => onFabClick('GROOM')}>Groom </motion.div>
+            <div className={cx(classes.dot, classes.dotReverse)}></div>
         </motion.div>
     </>
 }

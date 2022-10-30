@@ -30,7 +30,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       },
       address: [
         'Sarovar Vihar, Patratu Lake Resort',
-        'Kodram, Patratu, Jharkhand 829119'
+        'Kodram, Patratu, Jharkhand - 829119'
       ]
     },
     {
@@ -50,7 +50,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       location: GEL_CHURCH_RANCHI_LOCATION,
       address: [
         'Gossner Evangelical Lutheran Church',
-        'Main Rd, Ranchi, Jharkhand 834001'
+        'Main Rd, Ranchi, Jharkhand - 834001'
       ]
     },
     {
@@ -69,7 +69,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       },
       address: [
         'Sarovar Vihar, Patratu Lake Resort',
-        'Kodram, Patratu, Jharkhand 829119'
+        'Kodram, Patratu, Jharkhand - 829119'
       ]
     },
   ],
@@ -91,7 +91,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       location: GEL_CHURCH_RANCHI_LOCATION,
       address: [
         'Gossner Evangelical Lutheran Church',
-        'Main Rd, Ranchi, Jharkhand 834001'
+        'Main Rd, Ranchi, Jharkhand - 834001'
       ]
     },
     {
@@ -110,7 +110,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       },
       address: [
         'Sarovar Vihar, Patratu Lake Resort',
-        'Kodram, Patratu, Jharkhand 829119'
+        'Kodram, Patratu, Jharkhand - 829119'
       ]
     },
   ]
