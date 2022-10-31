@@ -8,7 +8,9 @@ import {
 import { createUseStyles } from "react-jss";
 import Button from '../components/Button'
 import cx from 'classnames';
-import bgImage from '../img/landing-bg.JPG'
+import bgImage from '../img/landing-bg.jpg'
+import HaldiImg from '../img/haldi-card.jpeg';
+
 
 const useStyles = createUseStyles({
     imgWrapper: {
@@ -25,9 +27,14 @@ const useStyles = createUseStyles({
         backgroundColor: 'salmon'
     },
     landing:{
-        height: '95vh',
-        width: '95vw',
-        // backgroundImage: `url(${bgImage})`,
+        height: '100vh',
+        width: '100vw',
+        margin: 'inherit',
+        backgroundImage: `url(${bgImage})`,
+        "@media (max-width: 720px)": {
+            backgroundImage: `url(${HaldiImg})`,
+            backgroundPosition: 'center'
+        }
     },
     sectionWrapper: {
         height: '100vh',
@@ -40,7 +47,8 @@ const useStyles = createUseStyles({
     },
     address: {
         fontSize: '1.4rem',
-        lineHeight: '34px'
+        lineHeight: '34px',
+        letterSpacing: '1px'
     },
     viewMap: {
         border: 'none',
@@ -59,7 +67,8 @@ const useStyles = createUseStyles({
     desc: {
         margin: '10px 0',
         fontFamily: 'Quicksand, sans-serif',
-        fontSize: '1.4rem'
+        fontSize: '1.4rem',
+        letterSpacing: '1px'
     },
     cardContent: {
         fontSize: '16px',

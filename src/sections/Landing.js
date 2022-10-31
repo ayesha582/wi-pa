@@ -1,12 +1,12 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
-import bgImage from '../img/landing-bg.JPG'
+// import bgImage from '../img/landing-bg.JPG'
 
 const useStyles = createUseStyles({
     sectionHead: {
         width: '100vw',
         height: '100vh',
-        backgroundImage: `url(${bgImage})`,
+        // backgroundImage: `url(${bgImage})`,
         backgroundSize: 'cover'
     },
     title: {

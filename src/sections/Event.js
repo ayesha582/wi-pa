@@ -105,7 +105,8 @@ const useStyles = createUseStyles({
     },
     address: {
         fontSize: '1.4rem',
-        lineHeight: '34px'
+        lineHeight: '34px',
+        letterSpacing: '2px'
     }
 });
 
