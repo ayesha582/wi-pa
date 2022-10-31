@@ -108,12 +108,13 @@ const SelectComponent = ({ setEventConfig }) => {
         setEventConfig(type)
         const element = document.body;
         element.style.overflow = 'unset';
-        setTimeout(
-            ()=>{
-                setAnimate(true)
-            },
-            3000
-        );
+        setAnimate(true)
+        // setTimeout(
+        //     ()=>{
+        //         setAnimate(true)
+        //     },
+        //     3000
+        // );
     }
 
     const classes = useStyles({});

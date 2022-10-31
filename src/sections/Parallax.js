@@ -21,13 +21,13 @@ const useStyles = createUseStyles({
         backgroundSize: 'cover',
         borderRadius: '4px',
         height: '60vh',
-        width: '40vw',
+        width: '400px',
         backgroundColor: 'salmon'
     },
     landing:{
         height: '95vh',
         width: '95vw',
-        backgroundImage: `url(${bgImage})`,
+        // backgroundImage: `url(${bgImage})`,
     },
     sectionWrapper: {
         height: '100vh',

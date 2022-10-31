@@ -106,3 +106,8 @@ h2 {
   bottom: 100px;
 }
 
+@media (max-width: 720px) {
+  h2 {
+    left: unset;
+  }
+}
