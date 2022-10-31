@@ -86,7 +86,7 @@ h1 {
   margin: 100px 0;
 }
 
-h2 {
+.parallaxImg {
   margin: 0;
   color: var(--accent);
   left: calc(50% + 130px);
@@ -103,11 +103,11 @@ h2 {
   right: 0;
   height: 5px;
   background: var(--accent);
-  bottom: 100px;
+  bottom: 50px;
 }
 
 @media (max-width: 720px) {
-  h2 {
+  .parallaxImg {
     left: unset;
   }
 }

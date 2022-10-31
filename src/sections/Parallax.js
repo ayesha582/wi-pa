@@ -14,19 +14,21 @@ import HaldiImg from '../img/haldi-card.jpeg';
 
 const useStyles = createUseStyles({
     imgWrapper: {
-        width: '300px',
-        height: '400px',
+        minWidth: '600px',
+        height: '80vh',
         position: 'relative',
         margin: '20px',
         background: 'var(--white)',
         overflow: 'hidden',
         backgroundSize: 'cover',
         borderRadius: '4px',
-        height: '60vh',
-        width: '400px',
-        backgroundColor: 'salmon'
+        backgroundColor: 'salmon',
+        "@media (max-width: 720px)": {
+            minWidth: '80vw',
+            height: '60vh'
+        }
     },
-    landing:{
+    landing: {
         height: '100vh',
         width: '100vw',
         margin: 'inherit',
@@ -48,7 +50,10 @@ const useStyles = createUseStyles({
     address: {
         fontSize: '1.4rem',
         lineHeight: '34px',
-        letterSpacing: '1px'
+        letterSpacing: '1px',
+        "@media (max-width: 720px)": {
+            fontSize: '1.2rem'
+        }
     },
     viewMap: {
         border: 'none',
@@ -62,18 +67,32 @@ const useStyles = createUseStyles({
     },
     descTitle: {
         fontSize: '4rem',
-        marginBottom: '20px'
+        marginBottom: '20px',
+        "@media (max-width: 720px)": {
+            fontSize: '3rem'
+        }
     },
     desc: {
         margin: '10px 0',
         fontFamily: 'Quicksand, sans-serif',
         fontSize: '1.4rem',
-        letterSpacing: '1px'
+        letterSpacing: '1px',
+        "@media (max-width: 720px)": {
+            fontSize: '1.1rem'
+        }
     },
     cardContent: {
         fontSize: '16px',
         flex: '1'
     },
+    landingHead: {
+        left: 'unset',
+        right: 'calc(50% + 130px)',
+        fontSize: '70px',
+        top: '50px',
+        position: 'absolute',
+        left: '50px'
+    }
 })
 
 function useParallax(value, distance) {
@@ -108,15 +127,15 @@ function Image({ event, isLanding }) {
     const classes = useStyles({});
     return (
         <section className={classes.sectionWrapper}>
-            <div ref={ref} className={isLanding?cx(classes.landing,classes.imgWrapper):classes.imgWrapper} style={isLanding?{}:{ ...event.cardStyle }}>
+            <div ref={ref} className={isLanding ? cx(classes.landing, classes.imgWrapper) : classes.imgWrapper} style={isLanding ? {} : { ...event.cardStyle }}>
             </div>
-            <motion.h2 style={{ y }}>
-                {isLanding ?
-                    <div>Ayesha & Prem</div>
-                    :
+            {isLanding ?
+                <div className={classes.landingHead}>Ayesha & Prem</div>
+                :
+                <motion.h2 style={{ y }} className="parallaxImg">
                     <CardContent {...event} classes={classes} />
-                }
-            </motion.h2>
+                </motion.h2>
+            }
         </section>
     );
 }
