@@ -8,7 +8,7 @@ import {
 import { createUseStyles } from "react-jss";
 import Button from '../components/Button'
 import cx from 'classnames';
-import bgImage from '../img/landing-bg.jpg'
+import bgImage from '../img/landing-bg-new.jpg'
 import HaldiImg from '../img/haldi-card.jpeg';
 
 
