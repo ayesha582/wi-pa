@@ -109,5 +109,8 @@ h1 {
 @media (max-width: 720px) {
   .parallaxImg {
     left: unset;
+    bottom: 40px;
+    line-height: 1;
+    text-align: center;
   }
 }

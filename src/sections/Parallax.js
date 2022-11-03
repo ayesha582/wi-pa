@@ -22,10 +22,13 @@ const useStyles = createUseStyles({
         overflow: 'hidden',
         backgroundSize: 'cover',
         borderRadius: '4px',
-        backgroundColor: 'salmon',
+        backgroundColor: 'black',
+        marginRight:'40vw',
         "@media (max-width: 720px)": {
             minWidth: '80vw',
-            height: '60vh'
+            height: '55vh',
+            marginRight: '0px',
+            marginLeft: '0px',
         }
     },
     landing: {
@@ -46,13 +49,17 @@ const useStyles = createUseStyles({
         position: 'relative',
         scrollSnapAlign: 'center',
         perspective: '500px',
+        "@media (max-width: 720px)": {
+            alignItems: 'flex-start'
+        }
     },
     address: {
         fontSize: '1.4rem',
         lineHeight: '34px',
         letterSpacing: '1px',
         "@media (max-width: 720px)": {
-            fontSize: '1.2rem'
+            fontSize: '1rem',
+            lineHeight: '28px',
         }
     },
     viewMap: {
@@ -63,13 +70,17 @@ const useStyles = createUseStyles({
         fontWeight: '600',
         cursor: 'pointer',
         fontFamily: 'Quicksand, sans-serif',
-        marginTop: '30px'
+        marginTop: '30px',
+        "@media (max-width: 720px)": {
+            marginTop: '15px',
+        }
     },
     descTitle: {
         fontSize: '4rem',
         marginBottom: '20px',
         "@media (max-width: 720px)": {
-            fontSize: '3rem'
+            fontSize: '2.5rem',
+            letterSpacing: '0px'
         }
     },
     desc: {
@@ -78,7 +89,7 @@ const useStyles = createUseStyles({
         fontSize: '1.4rem',
         letterSpacing: '1px',
         "@media (max-width: 720px)": {
-            fontSize: '1.1rem'
+            fontSize: '1rem'
         }
     },
     cardContent: {
@@ -122,7 +133,8 @@ const CardContent = ({ name, date, time, address, location, classes }) => {
 function Image({ event, isLanding }) {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({ target: ref });
-    const y = useParallax(scrollYProgress, 300);
+    const scrollThreshold = window.screen.width > 720 ? 300 : -20
+    const y = useParallax(scrollYProgress, scrollThreshold);
 
     const classes = useStyles({});
     return (
@@ -154,7 +166,7 @@ export default function Parallax({ eventConfig = [] }) {
             {eventConfig.map((event) => (
                 <Image event={event} />
             ))}
-            <motion.div className="progress" style={{ scaleX }} />
+            {/* <motion.div className="progress" style={{ scaleX }} /> */}
         </>
     );
 }

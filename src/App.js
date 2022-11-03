@@ -35,7 +35,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       ]
     },
     {
-      name: <><div>The</div><div>Wedding</div></>,
+      name: 'The Wedding',
       date: '14th FEB 2022',
       time: '9AM',
       address: 'G.E.L Church, Main Road - Ranchi',
@@ -76,7 +76,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
   ],
   GROOM: [
     {
-      name: <><div>The</div><div>Wedding</div></>,
+      name: 'The Wedding',
       date: '14th FEB 2022',
       time: '9AM',
       address: 'G.E.L Church, Main Road - Ranchi',
