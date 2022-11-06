@@ -132,7 +132,8 @@ const useStyles = createUseStyles({
         background: 'rgba(0,0,0,0.5)',
         zIndex: 1,
         "@media (max-width: 720px)": {
-            bottom: 0
+            bottom: 0,
+            height: '100vh'
         }
     },
     subHead: {
