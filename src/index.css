@@ -34,7 +34,7 @@ body {
   margin: 0;
   padding: 0;
   color: var(--accent);
-  background-image: var(--background);
+  background-image: url(./img/body-bg.jpg);
   overflow: hidden;
 }
 
@@ -95,15 +95,20 @@ h1 {
   letter-spacing: -3px;
   line-height: 1.2;
   position: absolute;
+  z-index: 1;
 }
 
 .progress {
-  position: fixed;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: var(--accent);
-  bottom: 50px;
+  height: 1.3px;
+  background: #DBA24E;
+  margin: 50px auto;
+  width: 500px;
+}
+
+line {
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+  fill: transparent;
 }
 
 @media (max-width: 720px) {

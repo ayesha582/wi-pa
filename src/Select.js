@@ -31,7 +31,10 @@ const useStyles = createUseStyles({
         top: '50%',
         left: '50%',
         transform: 'translate(-50%,-50%)',
-        zIndex: '40'
+        zIndex: '40',
+        "@media (max-width: 720px)": {
+            transform: 'translate(-50%,-50%) scale(0.85)',
+        }
     },
     circle: {
         background: 'wheat',
@@ -63,6 +66,10 @@ const useStyles = createUseStyles({
         color: '#F2E7DC',
         position: 'absolute',
         top: '30%',
+        "@media (max-width: 720px)": {
+            fontSize: '34px',
+            top: '20%'
+        }
     },
     dot: {
         position: 'absolute',
@@ -84,7 +91,7 @@ const SelectComponent = ({ setEventConfig }) => {
 
     const variants = {
         hide: {
-            top: '-50vh', opacity: 0, transitionEnd: {
+            y: '0', opacity: 0, transitionEnd: {
                 display: 'none'
             }
         },
@@ -95,7 +102,7 @@ const SelectComponent = ({ setEventConfig }) => {
 
     const variants2 = {
         hide: {
-            top: '100vh', opacity: 0, transitionEnd: {
+            y: '0', opacity: 0, transitionEnd: {
                 display: 'none'
             }
         },
@@ -109,12 +116,6 @@ const SelectComponent = ({ setEventConfig }) => {
         const element = document.body;
         element.style.overflow = 'unset';
         setAnimate(true)
-        // setTimeout(
-        //     ()=>{
-        //         setAnimate(true)
-        //     },
-        //     3000
-        // );
     }
 
     const classes = useStyles({});

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './App.css';
 import Select from './Select';
-import Layout from './Layout';
 import HaldiImg from './img/haldi-card.jpeg';
-import WeddingImg from './img/wedding-card.jpeg'
+import WeddingImg1 from './img/wedding-1.jpg'
 import ReceptionImg from './img/reception-card.jpeg'
 import Parallax from './sections/Parallax'
 
@@ -44,7 +43,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       seconDaryColor: '#656773',
       containerClass: 'wedding',
       cardStyle: {
-        backgroundImage: `url(${WeddingImg})`,
+        backgroundImage: `url(${WeddingImg1})`,
         backgroundSize: 'cover',
         backgroundPosition: 'bottom'
       },
@@ -85,7 +84,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       seconDaryColor: '#656773',
       containerClass: 'wedding',
       cardStyle: {
-        backgroundImage: `url(${WeddingImg})`,
+        backgroundImage: `url(${WeddingImg1})`,
         backgroundSize: 'cover',
         backgroundPosition: 'bottom'
       },
@@ -124,7 +123,6 @@ function App() {
   return (
     <div className="App">
       <Select setEventConfig={setEventConfig} />
-      {/* <Layout eventConfig={EVENTS_CONFIGS_BY_TYPE["BRIDE"]} /> */}
       {eventConfig && <Parallax eventConfig={EVENTS_CONFIGS_BY_TYPE[eventConfig]}/>}
     </div>
   );

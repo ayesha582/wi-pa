@@ -2,15 +2,16 @@ import { useRef } from "react";
 import {
     motion,
     useScroll,
-    useSpring,
     useTransform,
 } from "framer-motion";
 import { createUseStyles } from "react-jss";
 import Button from '../components/Button'
 import cx from 'classnames';
-import bgImage from '../img/landing-bg-new.jpg'
+import bgImage from '../img/bg-img.jpg'
 import HaldiImg from '../img/haldi-card.jpeg';
-
+import Lottie from 'react-lottie'
+import animationData from '../img/ornament.json'
+import Line from './Line'
 
 const useStyles = createUseStyles({
     imgWrapper: {
@@ -23,7 +24,8 @@ const useStyles = createUseStyles({
         backgroundSize: 'cover',
         borderRadius: '4px',
         backgroundColor: 'black',
-        marginRight:'40vw',
+        marginRight: '40vw',
+        zIndex: 2,
         "@media (max-width: 720px)": {
             minWidth: '80vw',
             height: '55vh',
@@ -36,9 +38,11 @@ const useStyles = createUseStyles({
         width: '100vw',
         margin: 'inherit',
         backgroundImage: `url(${bgImage})`,
+        backgroundPosition: 'bottom',
         "@media (max-width: 720px)": {
-            backgroundImage: `url(${HaldiImg})`,
-            backgroundPosition: 'center'
+            backgroundPosition: '-14px',
+            backgroundSize: 'auto 80vh',
+            backgroundRepeat: 'no-repeat'
         }
     },
     sectionWrapper: {
@@ -71,6 +75,7 @@ const useStyles = createUseStyles({
         cursor: 'pointer',
         fontFamily: 'Quicksand, sans-serif',
         marginTop: '30px',
+        color: '#1E1110',
         "@media (max-width: 720px)": {
             marginTop: '15px',
         }
@@ -97,12 +102,41 @@ const useStyles = createUseStyles({
         flex: '1'
     },
     landingHead: {
-        left: 'unset',
-        right: 'calc(50% + 130px)',
-        fontSize: '70px',
-        top: '50px',
+        left: 'calc(50% + 80px)',
+        fontSize: '92px',
         position: 'absolute',
-        left: '50px'
+        textShadow: '2px 2px #504747',
+        zIndex: '5',
+        height: '100%',
+        background: 'rgba(0 ,0 ,0 ,0.5)',
+        padding: '0 30px',
+        textAlign: 'center',
+        "@media (max-width: 720px)": {
+            height: 'unset',
+            width: '100%',
+            top: '0',
+            left: '0',
+            padding: 0,
+            fontSize: '48px'
+        }
+    },
+    gradient: {
+        position: 'absolute',
+        width: '100vw',
+        height: '40vh',
+        background: 'rgba(0,0,0,0.5)',
+        zIndex: 1,
+        "@media (max-width: 720px)": {
+            bottom: 0
+        }
+    },
+    subHead: {
+        fontFamily: 'Quicksand, sans-serif',
+        fontSize: '2rem',
+        marginTop: '20px',
+        "@media (max-width: 720px)": {
+            fontSize: '1.2rem'
+        }
     }
 })
 
@@ -130,19 +164,40 @@ const CardContent = ({ name, date, time, address, location, classes }) => {
     )
 }
 
-function Image({ event, isLanding }) {
+function Image({ event = {}, isLanding }) {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({ target: ref });
     const scrollThreshold = window.screen.width > 720 ? 300 : -20
     const y = useParallax(scrollYProgress, scrollThreshold);
+    const { cardStyle = {} } = event
+
+    const defaultOptions = {
+        loop: false,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
 
     const classes = useStyles({});
     return (
         <section className={classes.sectionWrapper}>
-            <div ref={ref} className={isLanding ? cx(classes.landing, classes.imgWrapper) : classes.imgWrapper} style={isLanding ? {} : { ...event.cardStyle }}>
+            <div ref={ref} className={isLanding ? cx(classes.imgWrapper, classes.landing) : classes.imgWrapper} style={cardStyle}>
             </div>
+            <div className={classes.gradient}></div>
             {isLanding ?
-                <div className={classes.landingHead}>Ayesha & Prem</div>
+                <div className={classes.landingHead}>
+                    <Lottie options={defaultOptions}
+                        height={86}
+                        width={"100%"}
+                        style={{marginTop: '70px'}}
+                    />
+                    <div className={classes.head}>Ayesha & Prem</div>
+                    <div className={classes.subHead}>14th Feb 2023</div>
+                    {/* <motion.div className="progress" animate={{ transition: {scaleX: '1'} }} initial={{ scaleX: '0' }}/> */}
+                    <Line/>
+                </div>
                 :
                 <motion.h2 style={{ y }} className="parallaxImg">
                     <CardContent {...event} classes={classes} />
@@ -153,20 +208,12 @@ function Image({ event, isLanding }) {
 }
 
 export default function Parallax({ eventConfig = [] }) {
-    const { scrollYProgress } = useScroll();
-    const scaleX = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001
-    });
-
     return (
         <>
             <Image isLanding={true} />
             {eventConfig.map((event) => (
                 <Image event={event} />
             ))}
-            {/* <motion.div className="progress" style={{ scaleX }} /> */}
         </>
     );
 }
