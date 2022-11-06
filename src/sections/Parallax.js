@@ -8,7 +8,7 @@ import { createUseStyles } from "react-jss";
 import Button from '../components/Button'
 import cx from 'classnames';
 import bgImage from '../img/bg-img.jpg'
-import HaldiImg from '../img/haldi-card.jpeg';
+import bgImageMweb from '../img/bg-img-mweb.jpg'
 import Lottie from 'react-lottie'
 import animationData from '../img/ornament.json'
 import Line from './Line'
@@ -43,10 +43,11 @@ const useStyles = createUseStyles({
         backgroundImage: `url(${bgImage})`,
         backgroundPosition: 'bottom',
         "@media (max-width: 720px)": {
-            backgroundPosition: '-14px',
             backgroundSize: 'auto 80vh',
             backgroundRepeat: 'no-repeat',
-            maxHeight: 'unset'
+            maxHeight: 'unset',
+            backgroundImage: `url(${bgImageMweb})`,
+            backgroundPosition: 'center'
         }
     },
     sectionWrapper: {
@@ -171,7 +172,7 @@ const CardContent = ({ name, date, time, address, location, classes }) => {
 function Image({ event = {}, isLanding }) {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({ target: ref });
-    const scrollThreshold = window.screen.width > 720 ? 300 : -20
+    const scrollThreshold = window.screen.width > 720 ? 300 : -40
     const y = useParallax(scrollYProgress, scrollThreshold);
     const { cardStyle = {} } = event
 
