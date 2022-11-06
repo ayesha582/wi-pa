@@ -11,7 +11,9 @@ import bgImage from '../img/bg-img.jpg'
 import HaldiImg from '../img/haldi-card.jpeg';
 import Lottie from 'react-lottie'
 import animationData from '../img/ornament.json'
-import Line from './Line'
+import Line from './Line';
+
+const RSVP_FORM_URL = 'https://forms.gle/TD7NMfMuEvfttrCc8';
 
 const useStyles = createUseStyles({
     imgWrapper: {
@@ -137,7 +139,28 @@ const useStyles = createUseStyles({
         "@media (max-width: 720px)": {
             fontSize: '1.2rem'
         }
-    }
+    },
+    rsvpContent: {
+        fontSize: '20px',
+        borderRadius: '50%',
+        background: '#ffbb00ab',
+        maxWidth: 'fit-content',
+        padding: '12px',
+        margin: 'auto',
+        height: '49px',
+        display: 'flex',
+        alignItems: 'center',
+        fontFamily: 'Quicksand, sans-serif',
+        textShadow: 'none',
+        cursor: 'pointer',
+    },
+    rsvpWrapper: {
+        margin: 'auto',
+        borderRadius: '50%',
+        padding: '6px',
+        border: '1.5px solid #ffbb00ab',
+        maxWidth: 'fit-content',
+    },
 })
 
 function useParallax(value, distance) {
@@ -179,6 +202,8 @@ function Image({ event = {}, isLanding }) {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    
+    const openRSVPForm = () => window.open(RSVP_FORM_URL, '_blank');
 
     const classes = useStyles({});
     return (
@@ -197,6 +222,11 @@ function Image({ event = {}, isLanding }) {
                     <div className={classes.subHead}>14th Feb 2023</div>
                     {/* <motion.div className="progress" animate={{ transition: {scaleX: '1'} }} initial={{ scaleX: '0' }}/> */}
                     <Line/>
+                    <div className={classes.rsvpWrapper}>
+                        <div className={classes.rsvpContent} onClick={openRSVPForm}>
+                            RSVP
+                        </div>
+                    </div>
                 </div>
                 :
                 <motion.h2 style={{ y }} className="parallaxImg">
