@@ -28,9 +28,12 @@ const useStyles = createUseStyles({
         zIndex: 2,
         "@media (max-width: 720px)": {
             minWidth: '80vw',
-            height: '55vh',
+            height: '50vh',
             marginRight: '0px',
             marginLeft: '0px',
+            width: 'calc(100vw - 40px)',
+            maxHeight: '50vh',
+            marginTop: '10vh'
         }
     },
     landing: {
@@ -42,7 +45,8 @@ const useStyles = createUseStyles({
         "@media (max-width: 720px)": {
             backgroundPosition: '-14px',
             backgroundSize: 'auto 80vh',
-            backgroundRepeat: 'no-repeat'
+            backgroundRepeat: 'no-repeat',
+            maxHeight: 'unset'
         }
     },
     sectionWrapper: {
