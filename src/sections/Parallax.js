@@ -8,7 +8,7 @@ import { createUseStyles } from "react-jss";
 import Button from '../components/Button'
 import cx from 'classnames';
 import bgImage from '../img/bg-img.jpg'
-import HaldiImg from '../img/haldi-card.jpeg';
+import bgImageMweb from '../img/bg-img-mweb.jpg'
 import Lottie from 'react-lottie'
 import animationData from '../img/ornament.json'
 import Line from './Line';
@@ -30,9 +30,12 @@ const useStyles = createUseStyles({
         zIndex: 2,
         "@media (max-width: 720px)": {
             minWidth: '80vw',
-            height: '55vh',
+            height: '50vh',
             marginRight: '0px',
             marginLeft: '0px',
+            width: 'calc(100vw - 40px)',
+            maxHeight: '50vh',
+            marginTop: '10vh'
         }
     },
     landing: {
@@ -42,9 +45,11 @@ const useStyles = createUseStyles({
         backgroundImage: `url(${bgImage})`,
         backgroundPosition: 'bottom',
         "@media (max-width: 720px)": {
-            backgroundPosition: '-14px',
             backgroundSize: 'auto 80vh',
-            backgroundRepeat: 'no-repeat'
+            backgroundRepeat: 'no-repeat',
+            maxHeight: 'unset',
+            backgroundImage: `url(${bgImageMweb})`,
+            backgroundPosition: 'center'
         }
     },
     sectionWrapper: {
@@ -129,7 +134,8 @@ const useStyles = createUseStyles({
         background: 'rgba(0,0,0,0.5)',
         zIndex: 1,
         "@media (max-width: 720px)": {
-            bottom: 0
+            bottom: 0,
+            height: '100vh'
         }
     },
     subHead: {
@@ -190,7 +196,7 @@ const CardContent = ({ name, date, time, address, location, classes }) => {
 function Image({ event = {}, isLanding }) {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({ target: ref });
-    const scrollThreshold = window.screen.width > 720 ? 300 : -20
+    const scrollThreshold = window.screen.width > 720 ? 300 : -40
     const y = useParallax(scrollYProgress, scrollThreshold);
     const { cardStyle = {} } = event
 

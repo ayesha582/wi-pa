@@ -114,7 +114,7 @@ line {
 @media (max-width: 720px) {
   .parallaxImg {
     left: unset;
-    bottom: 40px;
+    bottom: 8vh;
     line-height: 1;
     text-align: center;
   }
