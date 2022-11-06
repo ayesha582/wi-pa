@@ -20,13 +20,12 @@ export default function Line() {
     const isMweb = screenW > 720 ? false : true
     const end = screenW - 20
     const mid = (end / 2)
-    console.log(mid)
-
+    const boxW = isMweb?screenW: '500'
     return (
         <motion.svg
-            width={screenW}
+            width={boxW}
             height="50"
-            viewBox={`0 0 ${screenW} 50`}
+            viewBox={`0 0 ${boxW} 50`}
             initial="hidden"
             animate="visible"
         >
