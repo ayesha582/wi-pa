@@ -8,12 +8,15 @@ import { createUseStyles } from "react-jss";
 import Button from '../components/Button'
 import cx from 'classnames';
 import bgImage from '../img/bg-img.jpg'
-import bgImageMweb from '../img/bg-img-mweb.jpg'
+// import bgImageMweb from '../img/bg-img-mweb.jpg'
 import Lottie from 'react-lottie'
 import animationData from '../img/ornament.json'
 import Line from './Line';
 
 const RSVP_FORM_URL = 'https://forms.gle/TD7NMfMuEvfttrCc8';
+
+const LandingMwebSrc = "https://lh6.googleusercontent.com/NBBkTzDqZvE3e6Vi4d2sXakMcfzEpn-e_FlOzXE1NUuC-pAKrz3q8Qo8shED_UqJajk=w2400"
+const LandingDwebSrc = "https://lh4.googleusercontent.com/5Aj58QzlCAzXT2IP2CmWGhNuHAGLTPZan0j-T1XZEiLvhplGMJ2-BWRMyBE5AynUAn8=w2400"
 
 const useStyles = createUseStyles({
     imgWrapper: {
@@ -42,13 +45,13 @@ const useStyles = createUseStyles({
         height: '100vh',
         width: '100vw',
         margin: 'inherit',
-        backgroundImage: `url(${bgImage})`,
+        backgroundImage: `url(${LandingDwebSrc})`,
         backgroundPosition: 'bottom',
         "@media (max-width: 720px)": {
             backgroundSize: 'auto 80vh',
             backgroundRepeat: 'no-repeat',
             maxHeight: 'unset',
-            backgroundImage: `url(${bgImageMweb})`,
+            backgroundImage: `url(${LandingMwebSrc})`,
             backgroundPosition: 'center'
         }
     },
