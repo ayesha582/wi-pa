@@ -10,7 +10,6 @@ import cx from 'classnames';
 import Lottie from 'react-lottie'
 import animationData from '../img/ornament.json'
 import Line from './Line';
-import { unstable_batchedUpdates } from "react-dom";
 
 const RSVP_FORM_URL = 'https://forms.gle/TD7NMfMuEvfttrCc8';
 
