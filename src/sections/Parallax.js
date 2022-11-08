@@ -7,8 +7,6 @@ import {
 import { createUseStyles } from "react-jss";
 import Button from '../components/Button'
 import cx from 'classnames';
-import bgImage from '../img/bg-img.jpg'
-// import bgImageMweb from '../img/bg-img-mweb.jpg'
 import Lottie from 'react-lottie'
 import animationData from '../img/ornament.json'
 import Line from './Line';
