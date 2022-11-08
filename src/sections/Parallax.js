@@ -10,6 +10,7 @@ import cx from 'classnames';
 import Lottie from 'react-lottie'
 import animationData from '../img/ornament.json'
 import Line from './Line';
+import { unstable_batchedUpdates } from "react-dom";
 
 const RSVP_FORM_URL = 'https://forms.gle/TD7NMfMuEvfttrCc8';
 
@@ -160,6 +161,10 @@ const useStyles = createUseStyles({
         fontFamily: 'Quicksand, sans-serif',
         textShadow: 'none',
         cursor: 'pointer',
+        "@media (max-width: 720px)": {
+            height: '32px',
+            fontSize: '14px'
+        }
     },
     rsvpWrapper: {
         margin: 'auto',
@@ -167,28 +172,58 @@ const useStyles = createUseStyles({
         padding: '6px',
         border: '1.5px solid #ffbb00ab',
         maxWidth: 'fit-content',
+        "@media (max-width: 720px)": {
+            marginBottom: '24px'
+        }
     },
+    parallaxImg: {
+        margin: '0',
+        color: 'var(--accent)',
+        left: 'calc(50% + 130px)',
+        fontSize: '56px',
+        fontWeight: '700',
+        letterSpacing: '-3px',
+        lineHeight: '1.2',
+        position: 'absolute',
+        zIndex: '1'
+      },
+      rsvp:{
+        left: 'unset',
+        textAlign: 'center',
+        fontSize: '36px',
+        "@media (max-width: 720px)": {
+            bottom: '50%'
+        }
+      },
+      rsvpFont: {
+        fontSize: '36px',
+        "@media (max-width: 720px)": {
+            fontSize: '1.6rem',
+            margin: '0 20px',
+            lineHeight: '34px'
+        }
+      }
 })
 
 function useParallax(value, distance) {
     return useTransform(value, [0, 1], [-distance, distance]);
 }
 
-const CardContent = ({ name, date, time, address, location, classes }) => {
+const CardContent = ({ name, date, time, address, location, classes, button, onButtonClick, isRsvp}) => {
     const viewOnMap = location => () => window.open(location, '_blank');
 
     return (
-        <div className={classes.cardContent}>
+        <div className={cx(classes.cardContent)}>
             <div className={classes.descTitle}>{name}</div>
-            <div className={classes.desc}>{`${date}`}</div>
-            <div className={classes.desc}>{`${time} onwards`}</div>
+            {date && <div className={classes.desc}>{`${date}`}</div>}
+            {time && <div className={classes.desc}>{`${time} onwards`}</div>}
             {
                 address.map(a => {
-                    return <div className={classes.address}>{a}</div>
+                    return <div className={cx(classes.address,isRsvp? classes.rsvpFont: '' )}>{a}</div>
                 })
             }
-            <Button onClick={viewOnMap(location)} className={classes.viewMap}>
-                View on Map
+            <Button onClick={onButtonClick || viewOnMap(location)} className={classes.viewMap}>
+                {button}
             </Button>
         </div>
     )
@@ -199,7 +234,7 @@ function Image({ event = {}, isLanding }) {
     const { scrollYProgress } = useScroll({ target: ref });
     const scrollThreshold = window.screen.width > 720 ? 300 : -40
     const y = useParallax(scrollYProgress, scrollThreshold);
-    const { cardStyle = {} } = event
+    const { cardStyle = {}, isRsvp = false } = event
 
     const defaultOptions = {
         loop: false,
@@ -227,7 +262,6 @@ function Image({ event = {}, isLanding }) {
                     />
                     <div className={classes.head}>Ayesha & Prem</div>
                     <div className={classes.subHead}>14th Feb 2023</div>
-                    {/* <motion.div className="progress" animate={{ transition: {scaleX: '1'} }} initial={{ scaleX: '0' }}/> */}
                     <Line/>
                     <div className={classes.rsvpWrapper}>
                         <div className={classes.rsvpContent} onClick={openRSVPForm}>
@@ -236,7 +270,7 @@ function Image({ event = {}, isLanding }) {
                     </div>
                 </div>
                 :
-                <motion.h2 style={{ y }} className="parallaxImg">
+                <motion.h2 style={{ y }} className={cx('parallaxImg', isRsvp? classes.rsvp: '')}>
                     <CardContent {...event} classes={classes} />
                 </motion.h2>
             }
