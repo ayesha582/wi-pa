@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './App.css';
-import Select from './Select';
 import Parallax from './sections/Parallax';
 
 const useQuery = () =>
@@ -129,10 +128,8 @@ const EVENTS_CONFIGS_BY_TYPE = {
   ]
 }
 
-
 function App() {
-  const [eventConfig, setEventConfig] = useState('');
-
+  const [eventConfig, setEventConfig] = useState('GROOM');
 
   let config = eventConfig ? EVENTS_CONFIGS_BY_TYPE[eventConfig] : [];
 
@@ -144,7 +141,6 @@ function App() {
 
   return (
     <div className="App">
-      <Select setEventConfig={setEventConfig} />
       {eventConfig && <Parallax eventConfig={config} />}
     </div>
   );

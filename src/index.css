@@ -34,8 +34,10 @@ body {
   margin: 0;
   padding: 0;
   color: var(--accent);
-  background-image: url(https://lh3.googleusercontent.com/2flfNB7n0632oUpBC6QAqgNJkOsClLHwG3PKTPHMF_WC3SHoFKGMc8k8A9ayrBjzr1E=w2400);
-  overflow: hidden;
+  background-image: url('./img/mobile-bg.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 * {

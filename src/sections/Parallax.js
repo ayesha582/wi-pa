@@ -10,11 +10,13 @@ import cx from 'classnames';
 import Lottie from 'react-lottie'
 import animationData from '../img/ornament.json'
 import Line from './Line';
+import Select from '../Select';
+
 
 const RSVP_FORM_URL = 'https://forms.gle/TD7NMfMuEvfttrCc8';
 
-const LandingMwebSrc = "https://lh6.googleusercontent.com/NBBkTzDqZvE3e6Vi4d2sXakMcfzEpn-e_FlOzXE1NUuC-pAKrz3q8Qo8shED_UqJajk=w2400"
-const LandingDwebSrc = "https://lh4.googleusercontent.com/5Aj58QzlCAzXT2IP2CmWGhNuHAGLTPZan0j-T1XZEiLvhplGMJ2-BWRMyBE5AynUAn8=w2400"
+// const LandingMwebSrc = "https://lh6.googleusercontent.com/NBBkTzDqZvE3e6Vi4d2sXakMcfzEpn-e_FlOzXE1NUuC-pAKrz3q8Qo8shED_UqJajk=w2400"
+// const LandingDwebSrc = "https://lh4.googleusercontent.com/5Aj58QzlCAzXT2IP2CmWGhNuHAGLTPZan0j-T1XZEiLvhplGMJ2-BWRMyBE5AynUAn8=w2400"
 
 const useStyles = createUseStyles({
     imgWrapper: {
@@ -43,14 +45,15 @@ const useStyles = createUseStyles({
         height: '100vh',
         width: '100vw',
         margin: 'inherit',
-        backgroundImage: `url(${LandingDwebSrc})`,
-        backgroundPosition: 'bottom',
+        // backgroundImage: `url(${LandingDwebSrc})`,
+        // backgroundPosition: 'bottom',
+        backgroundColor: 'unset',
         "@media (max-width: 720px)": {
             backgroundSize: 'auto 80vh',
             backgroundRepeat: 'no-repeat',
             maxHeight: 'unset',
-            backgroundImage: `url(${LandingMwebSrc})`,
-            backgroundPosition: 'center'
+            // backgroundImage: `url(${LandingMwebSrc})`,
+            // backgroundPosition: 'center'
         }
     },
     sectionWrapper: {
@@ -122,10 +125,11 @@ const useStyles = createUseStyles({
         "@media (max-width: 720px)": {
             height: 'unset',
             width: '100%',
-            top: '0',
+            top: '50%',
             left: '0',
             padding: 0,
-            fontSize: '48px'
+            fontSize: '48px',
+            transform: 'translateY(-50%)'
         }
     },
     gradient: {
@@ -185,30 +189,30 @@ const useStyles = createUseStyles({
         lineHeight: '1.2',
         position: 'absolute',
         zIndex: '1'
-      },
-      rsvp:{
+    },
+    rsvp: {
         left: 'unset',
         textAlign: 'center',
         fontSize: '36px',
         "@media (max-width: 720px)": {
             bottom: '50%'
         }
-      },
-      rsvpFont: {
+    },
+    rsvpFont: {
         fontSize: '36px',
         "@media (max-width: 720px)": {
             fontSize: '1.6rem',
             margin: '0 20px',
             lineHeight: '34px'
         }
-      }
+    }
 })
 
 function useParallax(value, distance) {
     return useTransform(value, [0, 1], [-distance, distance]);
 }
 
-const CardContent = ({ name, date, time, address, location, classes, button, onButtonClick, isRsvp}) => {
+const CardContent = ({ name, date, time, address, location, classes, button, onButtonClick, isRsvp }) => {
     const viewOnMap = location => () => window.open(location, '_blank');
 
     return (
@@ -218,7 +222,7 @@ const CardContent = ({ name, date, time, address, location, classes, button, onB
             {time && <div className={classes.desc}>{`${time} onwards`}</div>}
             {
                 address.map(a => {
-                    return <div className={cx(classes.address,isRsvp? classes.rsvpFont: '' )}>{a}</div>
+                    return <div className={cx(classes.address, isRsvp ? classes.rsvpFont : '')}>{a}</div>
                 })
             }
             <Button onClick={onButtonClick || viewOnMap(location)} className={classes.viewMap}>
@@ -243,7 +247,7 @@ function Image({ event = {}, isLanding }) {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
-    
+
     const openRSVPForm = () => window.open(RSVP_FORM_URL, '_blank');
 
     const classes = useStyles({});
@@ -257,11 +261,10 @@ function Image({ event = {}, isLanding }) {
                     <Lottie options={defaultOptions}
                         height={86}
                         width={"100%"}
-                        style={{marginTop: '70px'}}
                     />
                     <div className={classes.head}>Ayesha & Prem</div>
                     <div className={classes.subHead}>14th Feb 2023</div>
-                    <Line/>
+                    <Line />
                     <div className={classes.rsvpWrapper}>
                         <div className={classes.rsvpContent} onClick={openRSVPForm}>
                             RSVP
@@ -269,7 +272,7 @@ function Image({ event = {}, isLanding }) {
                     </div>
                 </div>
                 :
-                <motion.h2 style={{ y }} className={cx('parallaxImg', isRsvp? classes.rsvp: '')}>
+                <motion.h2 style={{ y }} className={cx('parallaxImg', isRsvp ? classes.rsvp : '')}>
                     <CardContent {...event} classes={classes} />
                 </motion.h2>
             }
@@ -278,8 +281,12 @@ function Image({ event = {}, isLanding }) {
 }
 
 export default function Parallax({ eventConfig = [] }) {
+    const classes = useStyles({});
     return (
         <>
+            <section className={classes.sectionWrapper}>
+                <Select />
+            </section>
             <Image isLanding={true} />
             {eventConfig.map((event) => (
                 <Image event={event} />
