@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState , useEffect } from "react";
 import { createUseStyles } from "react-jss";
-import Lottie from 'react-lottie'
-import animationData from './img/flowers.json'
-import saveTheDate from './img/lottieSave.json'
+import Lottie from 'react-lottie';
+import animationData from './img/flowers.json';
+import saveTheDate from './img/lottieSave.json';
 
 
 const useStyles = createUseStyles({
@@ -49,6 +49,9 @@ const useStyles = createUseStyles({
 
 const SelectComponent = () => {
 
+    const [animate, setAnimate] = useState(false)
+    const [speed, setSpeed] = useState(1)
+
     const classes = useStyles({});
     const defaultOptions = {
         loop: true,
@@ -67,14 +70,22 @@ const SelectComponent = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
-    return <>
 
+    useEffect(()=>{
+        setAnimate(true)
+        setTimeout(() => {
+            setSpeed(0.5)
+        }, 0);
+    },[])
+
+    return animate ? <>
         <div className={classes.centerContent}>
             <div className={classes.textLottie}>
                 <Lottie options={defaultOptions1}
                     height={330}
                     width={330}
-                    speed={0.3}
+                    speed={speed}
+                    key={'text'}
                     style={{
                         position: 'fixed',
                         top: '50%%',
@@ -88,7 +99,8 @@ const SelectComponent = () => {
             <Lottie options={defaultOptions}
                 height={410}
                 width={410}
-                speed={0.4}
+                speed={speed}
+                key={'flowers'}
                 style={{
                     position: 'fixed',
                     top: '50%%',
@@ -99,7 +111,7 @@ const SelectComponent = () => {
                 }}
             />
         </div>
-    </>
+    </>: <></>
 }
 
 export default SelectComponent
