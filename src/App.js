@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './App.css';
 import Select from './Select';
-import Parallax from './sections/Parallax'
+import Parallax from './sections/Parallax';
 
-const RSVP_FORM_URL = 'https://forms.gle/TD7NMfMuEvfttrCc8';
+const useQuery = () =>
+  new URLSearchParams(new URL(window.location).search);
+
+const RSVP_FORM_URL = 'https://forms.gle/YzJq6qSzSfoQXY2f9';
 
 const PATRATU_RESORT_LOCATION = 'https://www.google.com/maps/place/Patratu+Lake+Resort/@23.6100753,85.2810746,15z/data=!4m8!3m7!1s0x0:0xf2cfa8cca411ddad!5m2!4m1!1i2!8m2!3d23.6101263!4d85.2810261';
 
@@ -12,24 +15,25 @@ const HaldiImg = "https://lh3.googleusercontent.com/wsXhB-lL006W3hEDW7i7lGiO-7WL
 const WeddingImg1 = "https://lh6.googleusercontent.com/CjzIajIaSC0D_HFnmHQEKJ3iiTsvznOHJ2Xd-BYG-4PDby1Wr3LZo8fxNuCVGKq0qcQ=w2400"
 const ReceptionImg = "https://lh6.googleusercontent.com/i92lq02zic_HxKSr9migXGbUrdNbhRMQceOei_mWnMCLzlCWxiQwadnzY15vIR_GuwE=w2400"
 
+const HALDI_EVENT = {
+  name: 'Haldi',
+  date: '13th FEB 2022',
+  time: '1PM onwards',
+  location: PATRATU_RESORT_LOCATION,
+  cardStyle: {
+    backgroundImage: `url(${HaldiImg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'bottom'
+  },
+  address: [
+    'Sarovar Vihar, Patratu Lake Resort',
+    'Kodram, Patratu, Jharkhand - 829119'
+  ],
+  button: 'View on Map'
+};
+
 const EVENTS_CONFIGS_BY_TYPE = {
   BRIDE: [
-    {
-      name: 'Haldi',
-      date: '13th FEB 2022',
-      time: '1PM onwards',
-      location: PATRATU_RESORT_LOCATION,
-      cardStyle: {
-        backgroundImage: `url(${HaldiImg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'bottom'
-      },
-      address: [
-        'Sarovar Vihar, Patratu Lake Resort',
-        'Kodram, Patratu, Jharkhand - 829119'
-      ],
-      button: 'View on Map'
-    },
     {
       name: 'The Wedding',
       date: '14th FEB 2022',
@@ -127,12 +131,21 @@ const EVENTS_CONFIGS_BY_TYPE = {
 
 
 function App() {
-  const [eventConfig, setEventConfig] = useState('')
+  const [eventConfig, setEventConfig] = useState('');
+
+
+  let config = eventConfig ? EVENTS_CONFIGS_BY_TYPE[eventConfig] : [];
+
+  const query = useQuery();
+  const showHaldi = query.get('haldi');
+
+  if (showHaldi && eventConfig === 'BRIDE') config = [HALDI_EVENT, ...config];
+
 
   return (
     <div className="App">
       <Select setEventConfig={setEventConfig} />
-      {eventConfig && <Parallax eventConfig={EVENTS_CONFIGS_BY_TYPE[eventConfig]} />}
+      {eventConfig && <Parallax eventConfig={config} />}
     </div>
   );
 }
