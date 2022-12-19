@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './App.css';
+import Audio from './components/Audio';
 import Parallax from './sections/Parallax';
 
 const useQuery = () =>
@@ -136,12 +137,13 @@ function App() {
   const query = useQuery();
   const showHaldi = query.get('haldi');
 
-  if (showHaldi && eventConfig === 'BRIDE') config = [HALDI_EVENT, ...config];
+  if (showHaldi) config = [HALDI_EVENT, ...config];
 
 
   return (
     <div className="App">
       {eventConfig && <Parallax eventConfig={config} />}
+      <Audio />
     </div>
   );
 }
