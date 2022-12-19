@@ -34,10 +34,11 @@ body {
   margin: 0;
   padding: 0;
   color: var(--accent);
-  background-image: url('./img/mobile-bg.png');
+  background-image: url('https://static.vecteezy.com/system/resources/previews/003/988/050/original/realistic-bokeh-blur-yellow-orange-light-on-dark-blue-night-with-blank-space-abstract-background-vector.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  background-position: 50%;
 }
 
 * {
@@ -119,5 +120,9 @@ line {
     bottom: 8vh;
     line-height: 1;
     text-align: center;
+  }
+
+  body {
+    background-image: url('./img/mobile-bg.png');
   }
 }

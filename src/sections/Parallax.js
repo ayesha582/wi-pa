@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
     motion,
     useScroll,
     useTransform,
+    useInView
 } from "framer-motion";
 import { createUseStyles } from "react-jss";
 import Button from '../components/Button'
@@ -27,10 +28,14 @@ const useStyles = createUseStyles({
         background: 'var(--white)',
         overflow: 'hidden',
         backgroundSize: 'cover',
-        borderRadius: '4px',
+        borderRadius: '8px',
         backgroundColor: 'black',
         marginRight: '40vw',
         zIndex: 2,
+        '--x':'50%',
+	    '--y': '50%',
+        border: '3px solid transparent',
+	    background: 'linear-gradient(#fff, #fffefe) padding-box, radial-gradient(farthest-corner at var(--x) var(--y), #ffffff, #fedf6e) border-box',
         "@media (max-width: 720px)": {
             minWidth: '80vw',
             height: '50vh',
@@ -41,19 +46,20 @@ const useStyles = createUseStyles({
             marginTop: '10vh'
         }
     },
+    cardImg:{
+        objectPosition: 'bottom',
+        width: '100%',
+    },
     landing: {
         height: '100vh',
         width: '100vw',
         margin: 'inherit',
-        // backgroundImage: `url(${LandingDwebSrc})`,
-        // backgroundPosition: 'bottom',
         backgroundColor: 'unset',
         "@media (max-width: 720px)": {
             backgroundSize: 'auto 80vh',
             backgroundRepeat: 'no-repeat',
             maxHeight: 'unset',
-            // backgroundImage: `url(${LandingMwebSrc})`,
-            // backgroundPosition: 'center'
+            background: 'transparent'
         }
     },
     sectionWrapper: {
@@ -63,7 +69,7 @@ const useStyles = createUseStyles({
         alignItems: 'center',
         position: 'relative',
         scrollSnapAlign: 'center',
-        perspective: '500px',
+        perspective: '100vw',
         "@media (max-width: 720px)": {
             alignItems: 'flex-start'
         }
@@ -119,7 +125,7 @@ const useStyles = createUseStyles({
         textShadow: '2px 2px #504747',
         zIndex: '5',
         height: '100%',
-        background: 'rgba(0 ,0 ,0 ,0.5)',
+        background: 'rgba(0 ,0 ,0 ,0.3)',
         padding: '0 30px',
         textAlign: 'center',
         "@media (max-width: 720px)": {
@@ -234,10 +240,15 @@ const CardContent = ({ name, date, time, address, location, classes, button, onB
 
 function Image({ event = {}, isLanding }) {
     const ref = useRef(null);
+    const lottieRef = useRef(null);
+    const isInView = useInView(lottieRef)
+
+    const [isStopped, stopIt] = useState(true)
+
     const { scrollYProgress } = useScroll({ target: ref });
     const scrollThreshold = window.screen.width > 720 ? 300 : -40
     const y = useParallax(scrollYProgress, scrollThreshold);
-    const { cardStyle = {}, isRsvp = false } = event
+    const { cardStyle = {}, isRsvp = false, cardImg } = event
 
     const defaultOptions = {
         loop: false,
@@ -248,12 +259,19 @@ function Image({ event = {}, isLanding }) {
         }
     };
 
+    useEffect(()=>{
+        if(isInView && isStopped){
+            stopIt(false)
+        }
+    },[isInView])
+
     const openRSVPForm = () => window.open(RSVP_FORM_URL, '_blank');
 
     const classes = useStyles({});
     return (
         <section className={classes.sectionWrapper}>
             <div ref={ref} className={isLanding ? cx(classes.imgWrapper, classes.landing) : classes.imgWrapper} style={cardStyle}>
+                <img src={cardImg} className={classes.cardImg}/>
             </div>
             <div className={classes.gradient}></div>
             {isLanding ?
@@ -261,10 +279,11 @@ function Image({ event = {}, isLanding }) {
                     <Lottie options={defaultOptions}
                         height={86}
                         width={"100%"}
+                        isStopped={isStopped}
                     />
-                    <div className={classes.head}>Ayesha & Prem</div>
+                    <div className={classes.head} ref={lottieRef}>Ayesha & Prem</div>
                     <div className={classes.subHead}>14th Feb 2023</div>
-                    <Line />
+                    {!isStopped && <Line />}
                     <div className={classes.rsvpWrapper}>
                         <div className={classes.rsvpContent} onClick={openRSVPForm}>
                             RSVP

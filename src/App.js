@@ -37,11 +37,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       name: 'The Wedding',
       date: '14th FEB 2022',
       time: '9AM',
-      cardStyle: {
-        backgroundImage: `url(${WeddingImg1})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'bottom'
-      },
+      cardImg: WeddingImg1,
       location: GEL_CHURCH_RANCHI_LOCATION,
       address: [
         'Gossner Evangelical Lutheran Church',
@@ -54,11 +50,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       date: '14th FEB 2022',
       time: '1PM onwards',
       location: PATRATU_RESORT_LOCATION,
-      cardStyle: {
-        backgroundImage: `url(${ReceptionImg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'bottom'
-      },
+      cardImg: ReceptionImg,
       address: [
         'Sarovar Vihar, Patratu Lake Resort',
         'Kodram, Patratu, Jharkhand - 829119'
@@ -84,11 +76,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       name: 'The Wedding',
       date: '14th FEB 2022',
       time: '9AM',
-      cardStyle: {
-        backgroundImage: `url(${WeddingImg1})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'bottom'
-      },
+      cardImg: WeddingImg1,
       location: GEL_CHURCH_RANCHI_LOCATION,
       address: [
         'Gossner Evangelical Lutheran Church',
@@ -101,11 +89,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       date: '14th FEB 2022',
       time: '1PM onwards',
       location: PATRATU_RESORT_LOCATION,
-      cardStyle: {
-        backgroundImage: `url(${ReceptionImg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'bottom'
-      },
+      cardImg: ReceptionImg,
       address: [
         'Sarovar Vihar, Patratu Lake Resort',
         'Kodram, Patratu, Jharkhand - 829119'
