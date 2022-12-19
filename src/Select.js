@@ -50,12 +50,13 @@ const useStyles = createUseStyles({
 const SelectComponent = () => {
 
     const [animate, setAnimate] = useState(false)
-    const [speed, setSpeed] = useState(1)
+    const [isStopped, stopIt] = useState(true)
+    const [isStoppedFlowers, stopItFlowers] = useState(true)
 
     const classes = useStyles({});
     const defaultOptions = {
-        loop: true,
-        autoplay: true,
+        loop: false,
+        autoplay: false,
         animationData: animationData,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
@@ -63,8 +64,8 @@ const SelectComponent = () => {
     };
 
     const defaultOptions1 = {
-        loop: true,
-        autoplay: true,
+        loop: false,
+        autoplay: false,
         animationData: saveTheDate,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
@@ -73,9 +74,16 @@ const SelectComponent = () => {
 
     useEffect(()=>{
         setAnimate(true)
-        setTimeout(() => {
-            setSpeed(0.5)
-        }, 0);
+        const timeout =  setTimeout(() => {
+            stopIt(false)
+        }, 3000);
+        const timeout1 =  setTimeout(() => {
+            stopItFlowers(false)
+        }, 1000);
+        return () => {
+            clearTimeout(timeout)
+            clearTimeout(timeout1)
+        }
     },[])
 
     return animate ? <>
@@ -84,8 +92,9 @@ const SelectComponent = () => {
                 <Lottie options={defaultOptions1}
                     height={330}
                     width={330}
-                    speed={speed}
+                    speed={0.2}
                     key={'text'}
+                    isStopped={isStopped}
                     style={{
                         position: 'fixed',
                         top: '50%%',
@@ -99,8 +108,9 @@ const SelectComponent = () => {
             <Lottie options={defaultOptions}
                 height={410}
                 width={410}
-                speed={speed}
+                speed={0.4}
                 key={'flowers'}
+                isStopped={isStoppedFlowers}
                 style={{
                     position: 'fixed',
                     top: '50%%',
