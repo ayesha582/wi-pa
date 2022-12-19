@@ -116,7 +116,7 @@ function App() {
     var userAgent = window.navigator.userAgent;
 
     if ((userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) && window.screen.availWidth < 600)) {
-      document.body.style.backgroundImage = 'url(https://lh3.googleusercontent.com/2flfNB7n0632oUpBC6QAqgNJkOsClLHwG3PKTPHMF_WC3SHoFKGMc8k8A9ayrBjzr1E=w2400)'
+      document.body.style.backgroundImage = 'linear-gradient(45deg, #360033, #0b8793)'
     }
   })
 
