@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css';
 import Audio from './components/Audio';
 import Parallax from './sections/Parallax';
@@ -20,11 +20,7 @@ const HALDI_EVENT = {
   date: '13th FEB 2022',
   time: '1PM onwards',
   location: PATRATU_RESORT_LOCATION,
-  cardStyle: {
-    backgroundImage: `url(${HaldiImg})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'bottom'
-  },
+  cardImg: HaldiImg,
   address: [
     'Sarovar Vihar, Patratu Lake Resort',
     'Kodram, Patratu, Jharkhand - 829119'
@@ -114,7 +110,15 @@ const EVENTS_CONFIGS_BY_TYPE = {
 }
 
 function App() {
-  const [eventConfig, setEventConfig] = useState('GROOM');
+  const [eventConfig] = useState('GROOM');
+
+  useEffect(()=>{
+    var userAgent = window.navigator.userAgent;
+
+    if ((userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) && window.screen.availWidth < 600)) {
+      document.body.style.backgroundImage = 'url(https://lh3.googleusercontent.com/2flfNB7n0632oUpBC6QAqgNJkOsClLHwG3PKTPHMF_WC3SHoFKGMc8k8A9ayrBjzr1E=w2400)'
+    }
+  })
 
   let config = eventConfig ? EVENTS_CONFIGS_BY_TYPE[eventConfig] : [];
 
