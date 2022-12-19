@@ -86,12 +86,19 @@ const SelectComponent = () => {
         }
     },[])
 
+    const getlottieWH = (isFlower) => {
+        if(window.screen.availWidth > 720){
+            return isFlower? 500 : 400
+        }
+        return isFlower? 410 : 330
+    }
+
     return animate ? <>
         <div className={classes.centerContent}>
             <div className={classes.textLottie}>
                 <Lottie options={defaultOptions1}
-                    height={330}
-                    width={330}
+                    height={getlottieWH()}
+                    width={getlottieWH()}
                     speed={0.2}
                     key={'text'}
                     isStopped={isStopped}
@@ -106,8 +113,8 @@ const SelectComponent = () => {
                 />
             </div>
             <Lottie options={defaultOptions}
-                height={410}
-                width={410}
+                height={getlottieWH(true)}
+                width={getlottieWH(true)}
                 speed={0.4}
                 key={'flowers'}
                 isStopped={isStoppedFlowers}

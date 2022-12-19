@@ -17,12 +17,12 @@ import Select from '../Select';
 const RSVP_FORM_URL = 'https://forms.gle/TD7NMfMuEvfttrCc8';
 
 // const LandingMwebSrc = "https://lh6.googleusercontent.com/NBBkTzDqZvE3e6Vi4d2sXakMcfzEpn-e_FlOzXE1NUuC-pAKrz3q8Qo8shED_UqJajk=w2400"
-// const LandingDwebSrc = "https://lh4.googleusercontent.com/5Aj58QzlCAzXT2IP2CmWGhNuHAGLTPZan0j-T1XZEiLvhplGMJ2-BWRMyBE5AynUAn8=w2400"
+const LandingDwebSrc = "https://lh4.googleusercontent.com/5Aj58QzlCAzXT2IP2CmWGhNuHAGLTPZan0j-T1XZEiLvhplGMJ2-BWRMyBE5AynUAn8=w2400"
 
 const useStyles = createUseStyles({
     imgWrapper: {
-        minWidth: '600px',
-        height: '80vh',
+        maxWidth: '40vw',
+        maxHeight: '80vh',
         position: 'relative',
         margin: '20px',
         background: 'var(--white)',
@@ -55,6 +55,10 @@ const useStyles = createUseStyles({
         width: '100vw',
         margin: 'inherit',
         backgroundColor: 'unset',
+        backgroundImage: `url(${LandingDwebSrc})`,
+        backgroundPosition: 'bottom',
+        maxWidth: 'unset',
+        maxHeight: 'unset',
         "@media (max-width: 720px)": {
             backgroundSize: 'auto 80vh',
             backgroundRepeat: 'no-repeat',
@@ -125,7 +129,7 @@ const useStyles = createUseStyles({
         textShadow: '2px 2px #504747',
         zIndex: '5',
         height: '100%',
-        background: 'rgba(0 ,0 ,0 ,0.3)',
+        background: 'rgba(0 ,0 ,0 ,0.5)',
         padding: '0 30px',
         textAlign: 'center',
         "@media (max-width: 720px)": {
@@ -135,7 +139,8 @@ const useStyles = createUseStyles({
             left: '0',
             padding: 0,
             fontSize: '48px',
-            transform: 'translateY(-50%)'
+            transform: 'translateY(-50%)',
+            background: 'rgba(0 ,0 ,0 ,0.3)'
         }
     },
     gradient: {
