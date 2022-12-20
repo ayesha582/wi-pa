@@ -218,11 +218,15 @@ const useStyles = createUseStyles({
     },
     monogram:{
         position: 'absolute',
-        bottom: '25vw',
+        bottom: '25px',
         left:'50%',
         transform: 'translateX(-50%)',
-        width: '20vw',
-        zIndex: 20
+        width: '90px',
+        zIndex: 20,
+        "@media (max-width: 720px)": {
+            bottom: '25vw',
+            width: '20vw',
+        }
     }
 })
 
