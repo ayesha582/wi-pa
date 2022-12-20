@@ -241,7 +241,7 @@ const CardContent = ({ name, date, time, address, location, classes, button, onB
         <div className={cx(classes.cardContent)}>
             <div className={classes.descTitle}>{name}</div>
             {date && <div className={classes.desc}>{`${date}`}</div>}
-            {time && <div className={classes.desc}>{`${time} onwards`}</div>}
+            {time && <div className={classes.desc}>{`${time}`}</div>}
             {
                 address.map(a => {
                     return <div className={cx(classes.address, isRsvp ? classes.rsvpFont : '')}>{a}</div>
