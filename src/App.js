@@ -106,7 +106,20 @@ const useStyles = createUseStyles({
     height: '100%',
     transform: 'translate(-50%,-50%)',
     fontSize: '20px',
-  }
+  },
+  scrollButton: {
+    position: 'absolute',
+    bottom: '50px',
+    left: '50%',
+    width: '24px',
+    height: '24px',
+    marginLeft: '-12px',
+    borderLeft: '4px solid #fff',
+    borderBottom: '4px solid #fff',
+    transform: 'rotate(-45deg)',
+    animation: 'sdb05 1.5s infinite',
+    boxSizing: 'border-box',
+}
 })
 
 function App() {
@@ -156,6 +169,7 @@ function App() {
         <>
           {eventConfig && <Parallax eventConfig={config} />}
           <Audio play={play} />
+          <div className={classes.scrollButton}></div>
         </>
       }
     </div>

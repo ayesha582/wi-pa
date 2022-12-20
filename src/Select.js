@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import Lottie from 'react-lottie';
 import animationData from './img/flowers.json';
@@ -43,6 +43,32 @@ const useStyles = createUseStyles({
     textLottie: {
         fontSize: '50px',
         textAlign: 'center'
+    },
+    '@-webkit-keyframes sdb05': {
+        '0%': {
+            '-webkit-transform': 'rotate(-45deg) translate(0, 0)',
+            opacity: '0',
+        },
+        '50%': {
+            opacity: '1',
+        },
+        '100%': {
+            '-webkit-transform': 'rotate(-45deg) translate(-20px, 20px)',
+            opacity: '0',
+        }
+    },
+    '@keyf,rames sdb05': {
+        '0%': {
+            transform: 'rotate(-45deg) translate(0, 0)',
+            opacity: '0',
+        },
+        '50%': {
+            opacity: '1',
+        },
+        '100%': {
+            transform: 'rotate(-45deg) translate(-20px, 20px)',
+            opacity: '0',
+        }
     }
 });
 
@@ -72,25 +98,25 @@ const SelectComponent = () => {
         }
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         setAnimate(true)
-        const timeout =  setTimeout(() => {
+        const timeout = setTimeout(() => {
             stopIt(false)
         }, 3000);
-        const timeout1 =  setTimeout(() => {
+        const timeout1 = setTimeout(() => {
             stopItFlowers(false)
         }, 1000);
         return () => {
             clearTimeout(timeout)
             clearTimeout(timeout1)
         }
-    },[])
+    }, [])
 
     const getlottieWH = (isFlower) => {
-        if(window.screen.availWidth > 720){
-            return isFlower? 500 : 400
+        if (window.screen.availWidth > 720) {
+            return isFlower ? 500 : 400
         }
-        return isFlower? 410 : 330
+        return isFlower ? 410 : 330
     }
 
     return animate ? <>
@@ -128,7 +154,7 @@ const SelectComponent = () => {
                 }}
             />
         </div>
-    </>: <></>
+    </> : <></>
 }
 
 export default SelectComponent
