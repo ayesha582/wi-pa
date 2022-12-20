@@ -123,7 +123,7 @@ function App() {
   let config = eventConfig ? EVENTS_CONFIGS_BY_TYPE[eventConfig] : [];
 
   const query = useQuery();
-  const showHaldi = query.get('haldi');
+  const showHaldi = query.get('ha');
 
   if (showHaldi) config = [HALDI_EVENT, ...config];
 
