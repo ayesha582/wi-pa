@@ -1,22 +1,17 @@
 import React, { useEffect } from 'react';
 import audioFile from '../audio.mp3';
 
-const AudioComponent = () => {
-    useEffect(() => {
-      let audio = new Audio(audioFile);
+const AudioComponent = ({play}) => {
+  useEffect(() => {
+    if(play) document.getElementById("myAudio").play();
+  }, [play]);
 
-      setTimeout(() => {
-        // start the audio after 1 sec
-        audio.play();
-      }, 1000);
-
-      return () => {
-        audio.pause();
-        audio.src = null;
-      };
-    }, []);
-
-    return <></>;
+  return <>
+    <audio controls id="myAudio">
+      <source src={audioFile} type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+  </>
 };
 
 export default AudioComponent

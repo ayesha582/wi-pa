@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import './App.css';
 import Audio from './components/Audio';
 import Parallax from './sections/Parallax';
+import Lottie from 'react-lottie';
+import animationData from './img/AudioBubble.json'
+import { createUseStyles } from "react-jss";
 
 const useQuery = () =>
   new URLSearchParams(new URL(window.location).search);
@@ -109,16 +112,38 @@ const EVENTS_CONFIGS_BY_TYPE = {
   ]
 }
 
+const useStyles = createUseStyles({
+  audioBubbleContainer:{
+    display: 'inline-block',
+    position: 'absolute',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+    left: '50%',
+  },
+  audio:{
+    outline: 'none',
+    border: 'none',
+    background: 'transparent',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    width: '100%',
+    height: '100%',
+    transform: 'translate(-50%,-50%)',
+    fontSize: '20px',
+  }
+})
+
 function App() {
   const [eventConfig] = useState('GROOM');
+  const [play, setPlay] = useState(false)
 
-  useEffect(()=>{
-    var userAgent = window.navigator.userAgent;
-
+  useEffect(() => {
+    const userAgent = window.navigator.userAgent;
     if ((userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) && window.screen.availWidth < 600)) {
       document.body.style.backgroundImage = 'linear-gradient(45deg, #360033, #0b8793)'
     }
-  })
+  }, [])
 
   let config = eventConfig ? EVENTS_CONFIGS_BY_TYPE[eventConfig] : [];
 
@@ -128,10 +153,36 @@ function App() {
   if (showHaldi) config = [HALDI_EVENT, ...config];
 
 
+  const playAudio = () => {
+    console.log('doing move over')
+    if (!play) setPlay(true)
+  }
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
+
+  const classes = useStyles({});
+  const lottieSize = window.screen.availWidth > 720 ? '20vw' : '45vw'
+
   return (
     <div className="App">
-      {eventConfig && <Parallax eventConfig={config} />}
-      <Audio />
+      {!play ? <div className={classes.audioBubbleContainer}>
+        <Lottie options={defaultOptions}
+          width={lottieSize}
+        />
+        <button onClick={playAudio} className={classes.audio}></button>
+      </div> :
+        <>
+          {eventConfig && <Parallax eventConfig={config} />}
+          <Audio play={play} />
+        </>
+      }
     </div>
   );
 }
