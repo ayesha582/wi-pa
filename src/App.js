@@ -24,6 +24,10 @@ const HALDI_EVENT = {
   time: '1PM onwards',
   location: PATRATU_RESORT_LOCATION,
   cardImg: HaldiImg,
+  cardStyle:{
+    backgroundImage:`url(${HaldiImg})`,
+    backgroundSize: 'cover',
+  },
   address: [
     'Sarovar Vihar, Patratu Lake Resort',
     'Kodram, Patratu, Jharkhand - 829119'
@@ -32,51 +36,17 @@ const HALDI_EVENT = {
 };
 
 const EVENTS_CONFIGS_BY_TYPE = {
-  BRIDE: [
+  BASE: [
     {
       name: 'The Wedding',
       date: '14th FEB 2022',
       time: '9AM',
       cardImg: WeddingImg1,
-      location: GEL_CHURCH_RANCHI_LOCATION,
-      address: [
-        'Gossner Evangelical Lutheran Church',
-        'Main Rd, Ranchi, Jharkhand - 834001'
-      ],
-      button: 'View on Map'
-    },
-    {
-      name: 'Lunch & Reception',
-      date: '14th FEB 2022',
-      time: '1PM onwards',
-      location: PATRATU_RESORT_LOCATION,
-      cardImg: ReceptionImg,
-      address: [
-        'Sarovar Vihar, Patratu Lake Resort',
-        'Kodram, Patratu, Jharkhand - 829119'
-      ],
-      button: 'View on Map'
-    },
-    {
-      name: 'RSVP',
-      address: [
-        'Kindly help us plan the event better by rsvping'
-      ],
-      button: 'RSVP to the event',
-      onButtonClick: () => window.open(RSVP_FORM_URL, '_blank'),
-      cardStyle: {
-        background: 'transparent',
-        zIndex: '0'
+      cardStyle:{
+        backgroundImage: `url(${WeddingImg1})`,
+        backgroundPosition: 'bottom',
+        backgroundSize: 'cover',
       },
-      isRsvp: true
-    },
-  ],
-  GROOM: [
-    {
-      name: 'The Wedding',
-      date: '14th FEB 2022',
-      time: '9AM',
-      cardImg: WeddingImg1,
       location: GEL_CHURCH_RANCHI_LOCATION,
       address: [
         'Gossner Evangelical Lutheran Church',
@@ -90,6 +60,11 @@ const EVENTS_CONFIGS_BY_TYPE = {
       time: '1PM onwards',
       location: PATRATU_RESORT_LOCATION,
       cardImg: ReceptionImg,
+      cardStyle:{
+        backgroundImage: `url(${ReceptionImg})`,
+        backgroundPosition: 'bottom',
+        backgroundSize: 'cover',
+      },
       address: [
         'Sarovar Vihar, Patratu Lake Resort',
         'Kodram, Patratu, Jharkhand - 829119'
@@ -135,7 +110,7 @@ const useStyles = createUseStyles({
 })
 
 function App() {
-  const [eventConfig] = useState('GROOM');
+  const [eventConfig] = useState('BASE');
   const [play, setPlay] = useState(false)
 
   useEffect(() => {

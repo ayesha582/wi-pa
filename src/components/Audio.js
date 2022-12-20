@@ -7,7 +7,7 @@ const AudioComponent = ({play}) => {
   }, [play]);
 
   return <>
-    <audio controls id="myAudio">
+    <audio id="myAudio" style={{visibility: 'hidden'}}>
       <source src={audioFile} type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>
