@@ -12,6 +12,7 @@ import Lottie from 'react-lottie'
 import animationData from '../img/ornament.json'
 import Line from './Line';
 import Select from '../Select';
+import Monogram from '../img/monogram.svg'
 
 
 const RSVP_FORM_URL = 'https://forms.gle/TD7NMfMuEvfttrCc8';
@@ -214,6 +215,14 @@ const useStyles = createUseStyles({
     },
     rsvpOverride:{
         border: 'none'
+    },
+    monogram:{
+        position: 'absolute',
+        bottom: '25vw',
+        left:'50%',
+        transform: 'translateX(-50%)',
+        width: '20vw',
+        zIndex: 20
     }
 })
 
@@ -297,6 +306,7 @@ function Image({ event = {}, isLanding }) {
                     <CardContent {...event} classes={classes} />
                 </motion.h2>
             }
+            {isRsvp && <div className={classes.monogram}><img src={Monogram}/></div>}
         </section>
     );
 }

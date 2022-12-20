@@ -9,7 +9,7 @@ import { createUseStyles } from "react-jss";
 const useQuery = () =>
   new URLSearchParams(new URL(window.location).search);
 
-const RSVP_FORM_URL = 'https://forms.gle/e5hhHddtzpmeEXSo6';
+const RSVP_FORM_URL = 'https://forms.gle/fTtVXkcbmmtsAqzd9';
 
 const PATRATU_RESORT_LOCATION = 'https://www.google.com/maps/place/Patratu+Lake+Resort/@23.6100753,85.2810746,15z/data=!4m8!3m7!1s0x0:0xf2cfa8cca411ddad!5m2!4m1!1i2!8m2!3d23.6101263!4d85.2810261';
 
@@ -74,7 +74,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
     {
       name: 'RSVP',
       address: [
-        'Kindly help us plan the event better by rsvping'
+        `We hope that you'll make it to our special day`
       ],
       button: 'RSVP to the event',
       onButtonClick: () => window.open(RSVP_FORM_URL, '_blank'),
