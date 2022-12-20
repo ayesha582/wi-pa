@@ -24,8 +24,8 @@ const HALDI_EVENT = {
   time: '1PM onwards',
   location: PATRATU_RESORT_LOCATION,
   cardImg: HaldiImg,
-  cardStyle:{
-    backgroundImage:`url(${HaldiImg})`,
+  cardStyle: {
+    backgroundImage: `url(${HaldiImg})`,
     backgroundSize: 'cover',
   },
   address: [
@@ -42,7 +42,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       date: '14th FEB 2022',
       time: '9AM',
       cardImg: WeddingImg1,
-      cardStyle:{
+      cardStyle: {
         backgroundImage: `url(${WeddingImg1})`,
         backgroundPosition: 'bottom',
         backgroundSize: 'cover',
@@ -60,7 +60,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
       time: '1PM onwards',
       location: PATRATU_RESORT_LOCATION,
       cardImg: ReceptionImg,
-      cardStyle:{
+      cardStyle: {
         backgroundImage: `url(${ReceptionImg})`,
         backgroundPosition: 'bottom',
         backgroundSize: 'cover',
@@ -88,14 +88,14 @@ const EVENTS_CONFIGS_BY_TYPE = {
 }
 
 const useStyles = createUseStyles({
-  audioBubbleContainer:{
+  audioBubbleContainer: {
     display: 'inline-block',
     position: 'absolute',
     top: '50%',
     transform: 'translate(-50%, -50%)',
     left: '50%',
   },
-  audio:{
+  audio: {
     outline: 'none',
     border: 'none',
     background: 'transparent',
@@ -119,17 +119,36 @@ const useStyles = createUseStyles({
     transform: 'rotate(-45deg)',
     animation: 'sdb05 1.5s infinite',
     boxSizing: 'border-box',
-}
+  },
+  tap: {
+    fontSize: '28px',
+    textAlign: 'center'
+  },
+  scroll: {
+    fontSize: '28px',
+    textAlign: 'center',
+    position: 'absolute',
+    left: '50%',
+    bottom: '70px',
+    transform: 'translateX(-50%)'
+  }
 })
 
 function App() {
   const [eventConfig] = useState('BASE');
-  const [play, setPlay] = useState(false)
+  const [play, setPlay] = useState(false);
+  const [scroll, setScroll] = useState(false);
 
   useEffect(() => {
     const userAgent = window.navigator.userAgent;
     if ((userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) && window.screen.availWidth < 600)) {
       document.body.style.backgroundImage = 'linear-gradient(45deg, #360033, #0b8793)'
+    }
+    const timeout = setTimeout(() => {
+      if (!scroll) setScroll(true)
+    }, 8000);
+    return () => {
+      clearTimeout(timeout)
     }
   }, [])
 
@@ -165,11 +184,17 @@ function App() {
           width={lottieSize}
         />
         <button onClick={playAudio} className={classes.audio}></button>
+        <div className={classes.tap}>tap to begin</div>
       </div> :
         <>
           {eventConfig && <Parallax eventConfig={config} />}
           <Audio play={play} />
-          <div className={classes.scrollButton}></div>
+          {
+            scroll && <>
+              <div className={classes.scroll}>scroll</div>
+              <div className={classes.scrollButton}> </div>
+            </>
+          }
         </>
       }
     </div>
