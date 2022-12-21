@@ -20,7 +20,7 @@ const ReceptionImg = "https://archive.org/download/screenshot-2022-12-19-at-9.57
 
 const HALDI_EVENT = {
   name: 'Haldi',
-  date: '13th FEB 2022',
+  date: '13th FEB 2023',
   time: '1PM onwards',
   location: PATRATU_RESORT_LOCATION,
   cardImg: HaldiImg,
@@ -39,7 +39,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
   BASE: [
     {
       name: 'The Wedding',
-      date: '14th FEB 2022',
+      date: '14th FEB 2023',
       time: '9AM',
       cardImg: WeddingImg1,
       cardStyle: {
@@ -56,7 +56,7 @@ const EVENTS_CONFIGS_BY_TYPE = {
     },
     {
       name: 'Lunch & Reception',
-      date: '14th FEB 2022',
+      date: '14th FEB 2023',
       time: '1PM onwards',
       location: PATRATU_RESORT_LOCATION,
       cardImg: ReceptionImg,
